@@ -122,8 +122,8 @@ class HorizontalOptions:
         if self.prev_line:
             y_pos -= (config["font_size"] + config["y_spacing"])
         draw_string(canvas, x_pos + x_offset, y_pos + ((config["box_size"]-config["font_size"])/2.0), self.label + (":" if not self.label == "" else ""), config["font_size"])
-        x_offset += 1
-        font_size = 0.15
+        x_offset += config["label_offset"]
+        font_size = config["box_font_size"]
         for o in self.options.split(" "):
             if o == '.':
                 x_offset += config["box_spacing"] + config["box_size"]
@@ -180,7 +180,7 @@ class BulkOptions:
                 if o == ',':
                     x_offset += config["box_spacing"]
                     continue
-                draw_square(canvas, x_pos + x_offset, y_pos + j * (config["y_spacing"] + config["box_spacing"]), config["box_size"], label = o)
+                draw_square(canvas, x_pos + x_offset, y_pos + j * (config["y_spacing"] + config["box_spacing"]), config["box_size"], label = o, font_size=config["box_font_size"])
             x_offset += config["box_spacing"] + config["box_size"]
 
         with open("StrongholdFields.csv", "a") as f:
@@ -195,7 +195,7 @@ class BulkOptions:
         return "BulkOptions"
 
 class Numbers:
-    def __init__(self, label, ones = 9, tens = 1, prev_line = False, tally = False, show_zero = False, tally_size=1):
+    def __init__(self, label, ones = 9, tens = 0, prev_line = False, tally = False, show_zero = False, tally_size=1):
         options = ""
         for i in range(0 if show_zero else 1, ones + 1):
             options += str(i) + " "
@@ -215,7 +215,7 @@ class Numbers:
 
     def draw(self, canvas, x_pos, y_pos, config):
         if self.tally:
-            x = x_pos + 1
+            x = x_pos + config["label_offset"]
             width = self.tally_size
             draw_rect(canvas, x, y_pos, width, config["box_size"])
             draw_string(canvas, x_pos, y_pos + ((config["box_size"]-config["font_size"])/2.0), self.master.label + ":", config["font_size"])

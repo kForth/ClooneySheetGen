@@ -1,6 +1,10 @@
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
 from reportlab.lib.units import inch
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
+
+pdfmetrics.registerFont(TTFont("OpenSansEmoji", "OpenSansEmoji.ttf"))
 
 from Fields import *
 
@@ -9,6 +13,7 @@ class Sheet:
         self.fields = []
         self.config = config
         self.canvas = canvas.Canvas(config["filename"] + ".pdf", pagesize = letter)
+        self.canvas.setFont("OpenSansEmoji", 1)
         self.headers = []
 
     def add_field(self, field):
