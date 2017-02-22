@@ -1,198 +1,207 @@
 [
   {
-    "type": "Image",
+    "type":    "Image",
     "options": {
-      "label": "Draw the Robot",
-      "width": 2,
-      "height": 1.5,
+      "label":      "Draw the Robot",
+      "width":      2,
+      "height":     1.5,
       "image_path": null,
-      "prev_line": true,
-      "offset": 3.5,
-      "y_offset": 1.25
+      "prev_line":  true,
+      "offset":     3.5,
+      "y_offset":   1.25
     }
   },
   {
-    "type": "Divider",
+    "type":    "Divider",
     "options": {
       "label": "Autonomous"
     }
   },
   {
-    "type": "Boolean",
+    "type":    "Boolean",
     "options": {
       "label": "Scored Low Boiler"
     }
   },
   {
-    "type": "Boolean",
+    "type":    "Boolean",
     "options": {
-      "label": "Reach Baseline",
+      "label":     "Reach Baseline",
       "prev_line": true
     }
   },
   {
-    "type": "Boolean",
+    "type":    "Boolean",
     "options": {
-      "label": "Trigger Hopper",
+      "label":     "Trigger Hopper",
       "prev_line": true
     }
   },
   {
-    "type": "Numbers",
+    "type":    "Numbers",
     "options": {
-    "label": "High Boiler",
-    "tens": 5
+      "label": "High Boiler",
+      "tens":  5
     }
   },
   {
-    "type": "Numbers",
+    "type":    "Numbers",
     "options": {
-    "label": "Gears",
-    "ones": 3
+      "label": "Gears",
+      "ones":  3
     }
   },
   {
-    "type": "Boolean",
+    "type":    "Boolean",
     "options": {
-    "label": "Dropped Gear",
-    "prev_line": true
+      "label":     "Dropped Gear",
+      "prev_line": true
     }
   },
   {
-    "type": "Divider",
+    "type":    "Divider",
     "options": {
-    "label": "Tele-Op Fuel"
+      "label": "Tele-Op Fuel"
     }
   },
   {
-    "type": "Numbers",
+    "type":    "Numbers",
     "options": {
-    "label": "Scored High",
-    "ones": 0,
-    "tens": 14,
-    "note_space": true
+      "label":      "Scored High",
+      "ones":       0,
+      "tens":       14,
+      "note_space": true
     }
   },
   {
-    "type": "Numbers",
+    "type":    "Numbers",
     "options": {
-    "label": "High Boiler Attempts",
-    "tens": 1,
-    "note_space": true
+      "label":      "High Boiler Attempts",
+      "tens":       1,
+      "note_space": true
     }
   },
   {
-    "type": "Numbers",
+    "type":    "Numbers",
     "options": {
-    "label": "Low Boiler Attempts",
-    "tens": 1,
-    "note_space": true
+      "label":      "Low Boiler Attempts",
+      "tens":       1,
+      "note_space": true
     }
   },
   {
-    "type": "Boolean",
+    "type":    "Boolean",
     "options": {
-    "label": "Balls From Floor"
+      "label": "Balls From Floor"
     }
   },
   {
-    "type": "Boolean",
+    "type":    "Boolean",
     "options": {
-    "label": "Balls From Hopper",
-    "prev_line": true
+      "label":     "Balls From Hopper",
+      "prev_line": true
     }
   },
   {
-    "type": "Boolean",
+    "type":    "Boolean",
     "options": {
-    "label": "Balls From Chute",
-    "prev_line": true
+      "label":     "Balls From Chute",
+      "prev_line": true
     }
   },
   {
-    "type": "Divider",
+    "type":    "Divider",
     "options": {
-    "label": "Tele-Op Gears"
+      "label": "Tele-Op Gears"
     }
   },
   {
-    "type": "Numbers",
+    "type":    "Numbers",
     "options": {
-    "label": "Placed Gears",
-    "tens": 1,
-    "note_space": true
+      "label":      "Placed Gears",
+      "tens":       1,
+      "note_space": true
     }
   },
   {
-    "type": "Numbers",
+    "type":    "Numbers",
     "options": {
-    "label": "Dropped Gears",
-    "tens": 1,
-    "note_space": true
+      "label":      "Dropped Gears",
+      "tens":       1,
+      "note_space": true
     }
   },
   {
-    "type": "Numbers",
+    "type":    "Numbers",
     "options": {
-    "label": "Gears from Floor",
-    "tens": 1,
-    "note_space": true
+      "label":      "Gears from Floor",
+      "tens":       1,
+      "note_space": true
     }
   },
   {
-    "type": "Boolean",
+    "type":    "Boolean",
     "options": {
-    "label": "Gears from Chute"
+      "label": "Gears from Chute"
     }
   },
   {
-    "type": "Divider",
+    "type":    "Divider",
     "options": {
-    "label": "Overall Performance"
+      "label": "Overall Performance"
     }
   },
   {
-    "type": "Boolean",
+    "type":    "Boolean",
     "options": {
-    "label": "Disabled"
+      "label": "Disabled"
     }
   },
   {
-    "type": "Boolean",
+    "type":    "Boolean",
     "options": {
-    "label": "Didn't Move",
-    "prev_line": true
+      "label":     "Didn't Move",
+      "prev_line": true
     }
   },
   {
-    "type": "Boolean",
+    "type":    "Boolean",
     "options": {
-    "label": "No Show",
-    "prev_line": true
+      "label":     "No Show",
+      "prev_line": true
     }
   },
   {
-    "type": "HorizontalOptions",
+    "type":    "HorizontalOptions",
     "options": {
-    "label": "Climbed",
-    "options": ["S", "F", "NA"]
+      "label":   "Climbed",
+      "options": [
+        "S",
+        "F",
+        "NA"
+      ]
     }
   },
   {
-    "type": "HorizontalOptions",
+    "type":    "HorizontalOptions",
     "options": {
-    "label": "Defense",
-    "options": ["💩", "👎", "👍", "🔥"],
-    "prev_line": true
+      "label":     "Defense",
+      "options":   [
+        "💩",
+        "👎",
+        "👍",
+        "🔥"
+      ],
+      "prev_line": true
     }
   },
   {
-    "type": "Image",
+    "type":    "Image",
     "options": {
-    "label": "Notes",
-    "width": 5.625,
-    "height": 0.75,
-    "image_path": null
+      "label":      "Notes",
+      "width":      5.625,
+      "height":     0.75,
+      "image_path": null
+    }
   }
-}
 ]

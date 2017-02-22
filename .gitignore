@@ -2,4 +2,6 @@
 *.pyc
 *.pdf
 *.csv
-*/__pycache__
+env/
+__pycache__/
+licenses/
