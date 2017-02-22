@@ -1,0 +1,198 @@
+[
+  {
+    "type": "Image",
+    "options": {
+      "label": "Draw the Robot",
+      "width": 2,
+      "height": 1.5,
+      "image_path": null,
+      "prev_line": true,
+      "offset": 3.5,
+      "y_offset": 1.25
+    }
+  },
+  {
+    "type": "Divider",
+    "options": {
+      "label": "Autonomous"
+    }
+  },
+  {
+    "type": "Boolean",
+    "options": {
+      "label": "Scored Low Boiler"
+    }
+  },
+  {
+    "type": "Boolean",
+    "options": {
+      "label": "Reach Baseline",
+      "prev_line": true
+    }
+  },
+  {
+    "type": "Boolean",
+    "options": {
+      "label": "Trigger Hopper",
+      "prev_line": true
+    }
+  },
+  {
+    "type": "Numbers",
+    "options": {
+    "label": "High Boiler",
+    "tens": 5
+    }
+  },
+  {
+    "type": "Numbers",
+    "options": {
+    "label": "Gears",
+    "ones": 3
+    }
+  },
+  {
+    "type": "Boolean",
+    "options": {
+    "label": "Dropped Gear",
+    "prev_line": true
+    }
+  },
+  {
+    "type": "Divider",
+    "options": {
+    "label": "Tele-Op Fuel"
+    }
+  },
+  {
+    "type": "Numbers",
+    "options": {
+    "label": "Scored High",
+    "ones": 0,
+    "tens": 14,
+    "note_space": true
+    }
+  },
+  {
+    "type": "Numbers",
+    "options": {
+    "label": "High Boiler Attempts",
+    "tens": 1,
+    "note_space": true
+    }
+  },
+  {
+    "type": "Numbers",
+    "options": {
+    "label": "Low Boiler Attempts",
+    "tens": 1,
+    "note_space": true
+    }
+  },
+  {
+    "type": "Boolean",
+    "options": {
+    "label": "Balls From Floor"
+    }
+  },
+  {
+    "type": "Boolean",
+    "options": {
+    "label": "Balls From Hopper",
+    "prev_line": true
+    }
+  },
+  {
+    "type": "Boolean",
+    "options": {
+    "label": "Balls From Chute",
+    "prev_line": true
+    }
+  },
+  {
+    "type": "Divider",
+    "options": {
+    "label": "Tele-Op Gears"
+    }
+  },
+  {
+    "type": "Numbers",
+    "options": {
+    "label": "Placed Gears",
+    "tens": 1,
+    "note_space": true
+    }
+  },
+  {
+    "type": "Numbers",
+    "options": {
+    "label": "Dropped Gears",
+    "tens": 1,
+    "note_space": true
+    }
+  },
+  {
+    "type": "Numbers",
+    "options": {
+    "label": "Gears from Floor",
+    "tens": 1,
+    "note_space": true
+    }
+  },
+  {
+    "type": "Boolean",
+    "options": {
+    "label": "Gears from Chute"
+    }
+  },
+  {
+    "type": "Divider",
+    "options": {
+    "label": "Overall Performance"
+    }
+  },
+  {
+    "type": "Boolean",
+    "options": {
+    "label": "Disabled"
+    }
+  },
+  {
+    "type": "Boolean",
+    "options": {
+    "label": "Didn't Move",
+    "prev_line": true
+    }
+  },
+  {
+    "type": "Boolean",
+    "options": {
+    "label": "No Show",
+    "prev_line": true
+    }
+  },
+  {
+    "type": "HorizontalOptions",
+    "options": {
+    "label": "Climbed",
+    "options": ["S", "F", "NA"]
+    }
+  },
+  {
+    "type": "HorizontalOptions",
+    "options": {
+    "label": "Defense",
+    "options": ["💩", "👎", "👍", "🔥"],
+    "prev_line": true
+    }
+  },
+  {
+    "type": "Image",
+    "options": {
+    "label": "Notes",
+    "width": 5.625,
+    "height": 0.75,
+    "image_path": null
+  }
+}
+]
