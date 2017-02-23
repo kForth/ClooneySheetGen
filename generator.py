@@ -5,10 +5,10 @@ from Sheet import *
 
 config = {
     "num_sheets":              1,
-    "filename":                "Steamworks2",
+    "filename":                "Steamworks",
     "encode_scanner":          True,
     "event":                   "Test 2017",
-    "spacer_page":             True,
+    "spacer_page":             False,
     "x_pos":                   0.25,
     "y_spacing":               0.18,
     "box_size":                0.18,  # 0.2
@@ -34,8 +34,8 @@ valid_fields = map(lambda x: x.__name__, field_types)
 
 
 class Generator(object):
-    def __init__(self, config):
-        self.config = config
+    def __init__(self, cfg):
+        self.config = cfg
 
     def create(self, sheet_fields):
         sheet = Sheet(self.config)
