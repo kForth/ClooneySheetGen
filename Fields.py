@@ -28,9 +28,23 @@ SHEET_WIDTH = 8.5  # 8.375
 SHEET_HEIGHT = 11  # 10.875
 
 
+def get_dump_filename(config):
+    return config["filename"] + "_fields.json"
+
+
 class Field(object):
     def __init__(self):
         self.prev_line = False
+        self.id = None
+
+    def set_id(self, data_id):
+        self.id = data_id
+
+    def get_id(self):
+        return self.id
+
+    def get_info(self):
+        return None
 
     def calc_width(self, *args, **kwargs):
         return 0
@@ -43,28 +57,53 @@ class Header(Field):
         self.pos = pos
 
     def draw(self, canvas, x_pos, y_pos, config):
-        x_pos = 0
-        y_pos = 0
         String("Celt-X Team 5406", font_size=0.5).draw(canvas, 0.05 + config["marker_size"],
-                                                       0.05 + config["marker_size"], config)
+                                                            0.05 + config["marker_size"], config)
         String("Clooney Scouting System", font_size=3.0 / 32).draw(canvas, 3 + config["marker_size"],
                                                                    0.5 + config["marker_size"], config)
         String(config["event"], font_size=3.0 / 32).draw(canvas, 0.125 + config["marker_size"],
                                                          0.5 + config["marker_size"], config)
-        String("Match " + str(self.match) + "    " + positions[self.pos] + "    Scout: _______", font_size=0.25).draw(
-            canvas, 0.125 + config["marker_size"], 0.625 + config["marker_size"], config)
+        String("Match " + str(self.match) + "    " + positions[self.pos] + "    Scout: _______", font_size=0.25)\
+            .draw(canvas, 0.125 + config["marker_size"], 0.625 + config["marker_size"], config)
 
         match_pos_string = str(self.match)
         while len(match_pos_string) < 3:
             match_pos_string = "0" + match_pos_string
         match_pos_string += str(self.pos)
 
-        Barcode("-EncodedMatchData", int(match_pos_string)).draw(canvas, 8.5 - config["marker_size"] - 0.325,
-                                                                 config["marker_size"], config)
+        barcode = Barcode("-EncodedMatchData", int(match_pos_string))
+        barcode.set_id("encoded_match_data")
+        barcode_x = 8.5 - config["marker_size"]
+        barcode_y = config["marker_size"]
+        barcode_height = barcode.draw(canvas, barcode_x, barcode_y, config)
 
-        y_pos += 1.5
-        x_pos += config["x_pos"] + config["marker_size"]
-        return BoxNumber("Team Number").draw(canvas, x_pos, y_pos, config)
+        team_num = BoxNumber("Team Number")
+        team_num.set_id("team_number")
+        team_num_x = config["x_pos"] + config["marker_size"]
+        team_num_y = 1.5
+        team_num_height = team_num.draw(canvas, team_num_x, team_num_y, config)
+
+        box_bardcode_info = [
+            {
+                "type":    barcode.get_type(),
+                "id":      barcode.get_id(),
+                "options": barcode.get_info(),
+                "x_pos":   barcode_x,
+                "y_pos":   barcode_y,
+                "height":  barcode_height
+            },
+            {
+                "type":    team_num.get_type(),
+                "id":      team_num.get_id(),
+                "options": team_num.get_info(),
+                "x_pos":   team_num_x,
+                "y_pos":   team_num_y,
+                "height":  team_num_height
+
+            }
+        ]
+
+        return team_num_height, box_bardcode_info
 
     def get_type(self):
         return "Header"
@@ -74,12 +113,16 @@ class Header(Field):
 
 
 class BoxNumber(Field):
-    def __init__(self, label, digits=4, prev_line=False, offset=0):
+    def __init__(self, label, digits=4):
         Field.__init__(self)
         self.label = label
         self.digits = digits
-        self.prev_line = prev_line
-        self.offset = offset
+
+    def get_info(self):
+        return {
+            "label": self.label,
+            "digits": self.digits
+        }
 
     def get_label(self):
         return self.label
@@ -91,17 +134,8 @@ class BoxNumber(Field):
         String("Team Number: ____________").draw(canvas, x_pos, y_pos + config["y_spacing"] / 2, config)
         y_pos += config["y_spacing"] * 2
         for i in range(0, self.digits):
-            HorizontalOptions("1" + "0" * (self.digits - 1 - i) + "'s", range(0, 10)).draw(canvas, x_pos,
-                                                                                           y_pos + config[
-                                                                                               "y_spacing"] * (1.5 * i),
-                                                                                           config, False)
-
-        with open("StrongholdFields.csv", "a") as f:
-            if self.label == "":
-                self.label = "-"
-            f.write(self.get_type() + "," + self.label + "," + str(self.digits) + "," + str(x_pos + 1) + "," + str(
-                y_pos) + "," + str(config["box_size"]) + "," + str(config["box_spacing"]) + "," + str(
-                    config["y_spacing"]) + "\n")
+            HorizontalOptions("1" + "0" * (self.digits - 1 - i) + "'s", range(0, 10)) \
+                .draw(canvas, x_pos, y_pos + config["y_spacing"] * (1.5 * i), config, False)
 
         return config["y_spacing"] * (self.digits + 3.5)
 
@@ -113,6 +147,12 @@ class Barcode(Field):
         self.data = data
         self.digits = digits
 
+    def get_info(self):
+        return {
+            "label": self.label,
+            "digits": self.digits
+        }
+
     def get_label(self):
         return self.label
 
@@ -120,6 +160,7 @@ class Barcode(Field):
         return "Barcode"
 
     def draw(self, canvas, x_pos, y_pos, config):
+        x_pos -= config["box_size"]
         length = len(bin(int("9" * self.digits))[2:])
         binary = str(format(int(self.data), '#0' + str(length) + 'b'))[2:]
         x_offset = 0
@@ -127,11 +168,7 @@ class Barcode(Field):
             draw_square(canvas, x_pos + x_offset, y_pos, config["box_size"], outline=1, infill=int(binary[i - 1]))
             x_offset -= config["box_size"]
 
-        with open("StrongholdFields.csv", "a") as f:
-            f.write(self.get_type() + "," + self.label + "," + str(self.digits) + "," + str(x_pos) + "," + str(
-                y_pos) + "," + str(config["box_size"]) + "\n")
-
-        return 0
+        return config["box_size"]
 
 
 class HorizontalOptions(Field):
@@ -143,6 +180,16 @@ class HorizontalOptions(Field):
         self.offset = offset
         self.note_space = note_space
         self.note_width = note_width
+
+    def get_info(self):
+        return {
+            "label": self.label,
+            "options": self.options,
+            "offset": self.offset,
+            "note_space": self.note_space,
+            "note_width": self.note_width,
+            "type": self.get_type()
+        }
 
     def get_label(self):
         return self.label
@@ -173,22 +220,12 @@ class HorizontalOptions(Field):
             draw_square(canvas, x_pos + x_offset, y_pos, config["box_size"], label=str(o), font_size=font_size)
             x_offset += config["box_spacing"] + config["box_size"]
 
-        if dump_info:
-            with open("StrongholdFields.csv", "a") as f:
-                if self.label == "":
-                    self.label = self.label_backup
-                f.write(self.get_type() + "," + self.label + "," + str(x_pos + 1 + self.offset) + "," + str(
-                    y_pos) + "," + str(config["box_size"]) + "," + str(config["box_spacing"]) + "," + " ".join(
-                    self.options) + "\n")
-
         return config["font_size"] + config["y_spacing"]
 
     def calc_width(self, config):
-        width = config["label_offset"] + int(self.note_space) * (self.note_width + config["box_spacing"]) + (config[
-                                                                                                                 "box_size"] +
-                                                                                                             config[
-                                                                                                                 "box_spacing"]) * len(
-            self.options)
+        width = config["label_offset"] + int(self.note_space) * (self.note_width + config["box_spacing"]) + \
+                (config["box_size"] + config["box_spacing"]) * len(self.options)
+
         return width
 
     def get_type(self):
@@ -202,6 +239,13 @@ class BulkOptions(Field):
         self.options = options
         self.labels = labels
         self.prev_line = prev_line
+
+    def get_info(self):
+        return {
+            "label": self.label,
+            "options": self.options,
+            "labels": self.labels
+        }
 
     def get_label(self):
         return self.label
@@ -231,12 +275,8 @@ class BulkOptions(Field):
                             config["box_size"], label=o, font_size=config["box_font_size"])
             x_offset += config["box_spacing"] + config["box_size"]
 
-        with open("StrongholdFields.csv", "a") as f:
-            f.write(self.get_type() + "," + self.label + "," + " ".join(self.labels) + "," + str(x_pos + 1) + "," + str(
-                y_pos) + "," + str(config["box_size"]) + "," + str(config["box_spacing"]) + "," + self.options + "\n")
-
         if self.prev_line:
-            return (config["y_spacing"] + config["box_spacing"])
+            return config["y_spacing"] + config["box_spacing"]
         else:
             return config["font_size"] * 2 + (config["y_spacing"] + config["box_spacing"]) * len(self.options)
 
@@ -255,7 +295,13 @@ class Numbers(HorizontalOptions):
 
         HorizontalOptions.__init__(self, label, options, **kwargs)
 
-    def draw(self, canvas, x_pos, y_pos, config):
+    def get_info(self):
+        d = HorizontalOptions.get_info(self)
+        d = HorizontalOptions.get_info(self)
+        d["type"] = self.get_type()
+        return d
+
+    def draw(self, canvas, x_pos, y_pos, config, *args):
         offset = HorizontalOptions.draw(self, canvas, x_pos, y_pos, config)
         return offset
 
@@ -274,6 +320,16 @@ class Image(Field):
         self.offset = offset
         self.y_offset = y_offset
 
+    def get_info(self):
+        return {
+            "label": self.label,
+            "width": self.width,
+            "height": self.height,
+            "offset": self.width,
+            "y_offset": self.width,
+            "prev_line": self.prev_line
+        }
+
     def get_label(self):
         return self.label
 
@@ -291,12 +347,8 @@ class Image(Field):
             draw_string(canvas, x_pos, y_pos + ((config["box_size"] - config["font_size"]) / 2.0), self.label + ":",
                         config["font_size"])
         draw_rect(canvas, x_pos + 1, y_pos, self.width, self.height)
-        if self.image_path != None:
+        if self.image_path is not None:
             draw_image(canvas, x_pos + 1, y_pos, self.width, self.height, self.image_path)
-
-        with open("StrongholdFields.csv", "a") as f:
-            f.write(self.get_type() + "," + self.label + "," + str(x_pos + 1) + "," + str(y_pos) + "," + str(
-                self.width) + "," + str(self.height) + "\n")
 
         if self.prev_line:
             return 0
@@ -306,9 +358,14 @@ class Image(Field):
 
 class Boolean(HorizontalOptions):
     def __init__(self, label, prev_line=False, offset=0):
-        HorizontalOptions.__init__(self, label, "_", prev_line, offset)
+        HorizontalOptions.__init__(self, label, ["_"], prev_line, offset)
 
-    def draw(self, canvas, x_pos, y_pos, config):
+    def get_info(self):
+        d = HorizontalOptions.get_info(self)
+        d["type"] = self.get_type()
+        return d
+
+    def draw(self, canvas, x_pos, y_pos, config, *args):
         HorizontalOptions.draw(self, canvas, x_pos, y_pos, config)
         return config["font_size"] + config["y_spacing"]
 
@@ -322,7 +379,7 @@ class Divider(Field):
         self.label = label
 
     def draw(self, canvas, x_pos, y_pos, config):
-        if self.label == None:
+        if self.label is None:
             return config["y_spacing"]
         if self.label == "-":
             draw_rect(canvas, config["marker_size"], y_pos, SHEET_WIDTH - (config["marker_size"] * 2),
@@ -331,7 +388,8 @@ class Divider(Field):
         else:
             draw_string(canvas, config["marker_size"] + 0.25, y_pos, self.label, config["font_size"] * 1.5)
             draw_rect(canvas, config["marker_size"] + 0.125, y_pos + (config["font_size"] * 1.5),
-                      SHEET_WIDTH - (config["marker_size"] * 2) - 0.25, config["divider_height"], outline=False, infill=True)
+                      SHEET_WIDTH - (config["marker_size"] * 2) - 0.25, config["divider_height"], outline=False,
+                      infill=True)
             return config["font_size"] * 1.5 + config["divider_height"] + config["y_spacing"]
 
     def get_type(self):
@@ -346,7 +404,8 @@ class Markers(Field):
         Field.__init__(self)
         canvas.setFillColor(config["marker_colour"])
         draw_square(canvas, 0, 0, config["marker_size"], outline=False, infill=True)
-        draw_square(canvas, SHEET_WIDTH - config["marker_size"], SHEET_HEIGHT - config["marker_size"], config["marker_size"],
+        draw_square(canvas, SHEET_WIDTH - config["marker_size"], SHEET_HEIGHT - config["marker_size"],
+                    config["marker_size"],
                     outline=False, infill=True)
         canvas.setFillColor(colors.black)
         draw_rect(canvas, config["marker_size"], config["marker_size"], SHEET_WIDTH - config["marker_size"] * 2,
@@ -354,7 +413,7 @@ class Markers(Field):
 
         with open("StrongholdFields.csv", "a") as f:
             f.write(self.get_type() + "," + str(config["marker_size"]) + "," + ",".join(
-                map(str, config["marker_colour"])) + "\n")
+                    map(str, config["marker_colour"])) + "\n")
 
     def get_type(self):
         return "Markers"
@@ -398,6 +457,12 @@ class Digits(Field):
         self.label = label
         self.values = values
 
+    def get_info(self):
+        return {
+            "label": self.label,
+            "digits": self.digits
+        }
+
     def get_type(self):
         return "Digits"
 
@@ -424,11 +489,6 @@ class Digits(Field):
             draw_string(canvas, x_pos,
                         y_pos + config["seven_segment_width"] * 2 + config["seven_segment_thickness"] * 3 + config[
                             "box_spacing"], re.sub(r"(?<=\w)([A-Z])", r" \1", self.label[1:]), config["font_size"])
-
-        with open("StrongholdFields.csv", "a") as f:
-            f.write(self.get_type() + "," + self.label + "," + str(x_pos) + "," + str(y_pos) + "," + str(
-                    config["seven_segment_width"]) + "," + str(config["seven_segment_thickness"]) + "," + str(
-                    config["seven_segment_offset"]) + "\n")
 
         return 0.6875 + config["y_spacing"]
 
