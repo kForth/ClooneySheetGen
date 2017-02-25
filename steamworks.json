@@ -9,7 +9,8 @@
       "prev_line":  true,
       "offset":     3.5,
       "y_offset":   1.25
-    }
+    },
+    "id": "robot_drawing"
   },
   {
     "type":    "Divider",
@@ -21,42 +22,48 @@
     "type":    "Boolean",
     "options": {
       "label": "Scored Low Boiler"
-    }
+    },
+    "id": "auto_scored_low"
   },
   {
     "type":    "Boolean",
     "options": {
       "label":     "Reach Baseline",
       "prev_line": true
-    }
+    },
+    "id": "auto_reached_baseline"
   },
   {
     "type":    "Boolean",
     "options": {
       "label":     "Trigger Hopper",
       "prev_line": true
-    }
+    },
+    "id": "auto_triggered_hopper"
   },
   {
     "type":    "Numbers",
     "options": {
-      "label": "High Boiler",
+      "label": "Scored High",
       "tens":  5
-    }
+    },
+    "id": "auto_scored_high"
   },
   {
     "type":    "Numbers",
     "options": {
       "label": "Gears",
       "ones":  3
-    }
+    },
+    "id": "auto_gears_scored"
   },
   {
     "type":    "Boolean",
     "options": {
       "label":     "Dropped Gear",
       "prev_line": true
-    }
+    },
+    "id": "auto_dropped_gear"
   },
   {
     "type":    "Divider",
@@ -71,7 +78,8 @@
       "ones":       0,
       "tens":       14,
       "note_space": true
-    }
+    },
+    "id": "tele_scored_high"
   },
   {
     "type":    "Numbers",
@@ -79,7 +87,8 @@
       "label":      "High Boiler Attempts",
       "tens":       1,
       "note_space": true
-    }
+    },
+    "id": "tele_high_attempts"
   },
   {
     "type":    "Numbers",
@@ -87,27 +96,31 @@
       "label":      "Low Boiler Attempts",
       "tens":       1,
       "note_space": true
-    }
+    },
+    "id": "tele_low_attemps"
   },
   {
     "type":    "Boolean",
     "options": {
       "label": "Balls From Floor"
-    }
+    },
+    "id": "tele_balls_from_floor"
   },
   {
     "type":    "Boolean",
     "options": {
       "label":     "Balls From Hopper",
       "prev_line": true
-    }
+    },
+    "id": "tele_balls_from_hopper"
   },
   {
     "type":    "Boolean",
     "options": {
       "label":     "Balls From Chute",
       "prev_line": true
-    }
+    },
+    "id": "tele_balls_from_chute"
   },
   {
     "type":    "Divider",
@@ -121,7 +134,8 @@
       "label":      "Placed Gears",
       "tens":       1,
       "note_space": true
-    }
+    },
+    "id": "tele_gears_scored"
   },
   {
     "type":    "Numbers",
@@ -129,7 +143,8 @@
       "label":      "Dropped Gears",
       "tens":       1,
       "note_space": true
-    }
+    },
+    "id": "tele_dropped_gears"
   },
   {
     "type":    "Numbers",
@@ -137,13 +152,15 @@
       "label":      "Gears from Floor",
       "tens":       1,
       "note_space": true
-    }
+    },
+    "id": "tele_gears_from_floor"
   },
   {
     "type":    "Boolean",
     "options": {
       "label": "Gears from Chute"
-    }
+    },
+    "id": "tele_gears_from_chute"
   },
   {
     "type":    "Divider",
@@ -155,21 +172,24 @@
     "type":    "Boolean",
     "options": {
       "label": "Disabled"
-    }
+    },
+    "id": "disabled"
   },
   {
     "type":    "Boolean",
     "options": {
       "label":     "Didn't Move",
       "prev_line": true
-    }
+    },
+    "id": "no_move"
   },
   {
     "type":    "Boolean",
     "options": {
       "label":     "No Show",
       "prev_line": true
-    }
+    },
+    "id": "no_show"
   },
   {
     "type":    "HorizontalOptions",
@@ -180,7 +200,8 @@
         "F",
         "NA"
       ]
-    }
+    },
+    "id": "tele_climbed"
   },
   {
     "type":    "HorizontalOptions",
@@ -193,7 +214,8 @@
         "🔥"
       ],
       "prev_line": true
-    }
+    },
+    "id": "tele_defense"
   },
   {
     "type":    "Image",
@@ -202,6 +224,7 @@
       "width":      5.625,
       "height":     0.75,
       "image_path": null
-    }
+    },
+    "id": "notes"
   }
 ]
