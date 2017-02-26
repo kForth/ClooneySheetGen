@@ -6,7 +6,7 @@ from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfgen import canvas
 import json
 
-from Fields import *
+from fields import *
 
 pdfmetrics.registerFont(TTFont("OpenSansEmoji", "OpenSansEmoji.ttf"))
 

@@ -2,7 +2,7 @@ import re
 
 from reportlab.lib import colors
 
-from DrawFunctions import *
+from draw_functions import *
 
 numbers = [[True, True, True, False, True, True, True],  # 0
            [False, False, True, False, False, True, False],  # 1
@@ -164,9 +164,9 @@ class Barcode(Field):
         length = len(bin(int("9" * self.digits))[2:])
         binary = str(format(int(self.data), '#0' + str(length) + 'b'))[2:]
         x_offset = 0
-        for i in range(len(binary), 0, -1):
-            draw_square(canvas, x_pos + x_offset, y_pos, config["box_size"], outline=1, infill=int(binary[i - 1]))
-            x_offset -= config["box_size"]
+        for i in range(len(binary)-1, 0, -1):
+            draw_square(canvas, x_pos + x_offset, y_pos, config["box_size"], outline=1, infill=int(binary[i]))
+            x_offset -= config["box_size"] + config["box_spacing"] / 4
 
         return config["box_size"]
 
