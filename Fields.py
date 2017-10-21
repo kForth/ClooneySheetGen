@@ -172,7 +172,7 @@ class Barcode(Field):
 
 
 class HorizontalOptions(Field):
-    def __init__(self, label, options, prev_line=False, offset=0, note_space=False, note_width=3):
+    def __init__(self, label, options: list, prev_line=False, offset=0, note_space=False, note_width=3):
         Field.__init__(self)
         self.label = label
         self.options = options
@@ -208,7 +208,11 @@ class HorizontalOptions(Field):
 
         x_offset += config["label_offset"]
         font_size = config["box_font_size"]
-        for o in self.options:
+        for op in self.options:
+            if type(op) == list:
+                o = op[0]
+            else:
+                o = op
             if o == '.':
                 x_offset += config["box_spacing"] + config["box_size"]
                 continue
@@ -410,10 +414,6 @@ class Markers(Field):
         canvas.setFillColor(colors.black)
         draw_rect(canvas, config["marker_size"], config["marker_size"], SHEET_WIDTH - config["marker_size"] * 2,
                   SHEET_HEIGHT - config["marker_size"] * 2)
-
-        with open("StrongholdFields.csv", "a") as f:
-            f.write(self.get_type() + "," + str(config["marker_size"]) + "," + ",".join(
-                    map(str, config["marker_colour"])) + "\n")
 
     def get_type(self):
         return "Markers"

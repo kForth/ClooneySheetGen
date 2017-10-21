@@ -8,7 +8,7 @@ import json
 
 from fields import *
 
-pdfmetrics.registerFont(TTFont("OpenSansEmoji", "OpenSansEmoji.ttf"))
+pdfmetrics.registerFont(TTFont("OpenSansEmoji", "resources/OpenSansEmoji.ttf"))
 
 field_types = [Barcode, Boolean, BoxNumber, BulkOptions, Digits, Divider, Header, HorizontalOptions, Image, Markers,
                Numbers, SevenSegment, String]
@@ -88,7 +88,7 @@ class Sheet:
 
     def _draw_sheets(self):
         for p in range(0, 6):
-            for m in range(1, self.config["num_sheets"] + 1):
+            for m in range(self.config["init_sheet_num"], self.config["num_sheets"] + 1):
                 self._draw_sheet(m, p)
                 self.canvas.showPage()
             if self.config["spacer_page"]:

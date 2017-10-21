@@ -1,0 +1,195 @@
+[
+  {
+    "type":    "Image",
+    "options": {
+      "label":      "Draw the Robot",
+      "width":      2,
+      "height":     1.5,
+      "image_path": null,
+      "prev_line":  true,
+      "offset":     3.75,
+      "y_offset":   1.25
+    },
+    "id": "robot_drawing"
+  },
+  {
+    "type":    "Divider",
+    "options": {
+      "label": "Autonomous"
+    }
+  },
+  {
+    "type":    "Boolean",
+    "options": {
+      "label":     "Reached Baseline"
+    },
+    "id": "auto_reached_baseline"
+  },
+  {
+    "type":    "Boolean",
+    "options": {
+      "label": "Scored Low Boiler",
+      "prev_line": true
+    },
+    "id": "auto_scored_low"
+  },
+  {
+    "type":    "Boolean",
+    "options": {
+      "label":     "Triggered Hopper",
+      "prev_line": true
+    },
+    "id": "auto_triggered_hopper"
+  },
+  {
+    "type":    "Numbers",
+    "options": {
+      "label": "Scored High",
+      "tens":  5
+    },
+    "id": "auto_scored_high"
+  },
+  {
+    "type":    "Numbers",
+    "options": {
+      "label": "Gears",
+      "ones":  3
+    },
+    "id": "auto_gears_scored"
+  },
+  {
+    "type":    "Boolean",
+    "options": {
+      "label":     "Dropped Gear",
+      "prev_line": true
+    },
+    "id": "auto_dropped_gear"
+  },
+  {
+    "type":    "Divider",
+    "options": {
+      "label": "Tele-Op"
+    }
+  },
+  {
+    "type":    "Numbers",
+    "options": {
+      "label":      "Placed Gears",
+      "tens":       1,
+      "note_space": true
+    },
+    "id": "tele_gears_scored"
+  },
+  {
+    "type":    "Numbers",
+    "options": {
+      "label":      "Dropped Gears",
+      "tens":       1,
+      "note_space": true
+    },
+    "id": "tele_dropped_gears"
+  },
+  {
+    "type":    "Numbers",
+    "options": {
+      "label":      "Gears from Floor",
+      "tens":       1,
+      "note_space": true
+    },
+    "id": "tele_gears_from_floor"
+  },
+  {
+    "type":    "Numbers",
+    "options": {
+      "label": "Gears from Chute",
+      "tens":       1,
+      "note_space": true
+    },
+    "id": "tele_gears_from_chute"
+  },
+  {
+    "type":    "HorizontalOptions",
+    "options": {
+      "label": "Scored High",
+      "options":   [
+        ["💩", 0],
+        ["👎", 1],
+        ["👍", 2],
+        ["🔥", 3]
+      ]
+    },
+    "id": "tele_scored_high"
+  },
+  {
+    "type":    "Boolean",
+    "options": {
+      "label":     "Scored Low",
+      "prev_line": true
+    },
+    "id": "tele_scored_low"
+  },
+  {
+    "type":    "Divider",
+    "options": {
+      "label": "Overall Performance"
+    }
+  },
+  {
+    "type":    "Boolean",
+    "options": {
+      "label": "Stopped Moving"
+    },
+    "id": "disabled"
+  },
+  {
+    "type":    "Boolean",
+    "options": {
+      "label":     "Never Moved",
+      "prev_line": true
+    },
+    "id": "no_move"
+  },
+  {
+    "type":    "Boolean",
+    "options": {
+      "label":     "No Show",
+      "prev_line": true
+    },
+    "id": "no_show"
+  },
+  {
+    "type":    "HorizontalOptions",
+    "options": {
+      "label":   "Climbed",
+      "options": [
+        ["S", 1],
+        ["F", 0]
+      ]
+    },
+    "id": "tele_climbed"
+  },
+  {
+    "type":    "HorizontalOptions",
+    "options": {
+      "label":     "Defense",
+      "options":   [
+        ["💩", 0],
+        ["👎", 1],
+        ["👍", 2],
+        ["🔥", 3]
+      ],
+      "prev_line": true
+    },
+    "id": "tele_defense"
+  },
+  {
+    "type":    "Image",
+    "options": {
+      "label":      "Notes",
+      "width":      5.625,
+      "height":     2.5,
+      "image_path": null
+    },
+    "id": "notes"
+  }
+]

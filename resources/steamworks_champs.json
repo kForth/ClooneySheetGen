@@ -1,0 +1,189 @@
+[
+  {
+    "type":    "Image",
+    "options": {
+      "label":      "Draw the Robot",
+      "width":      2,
+      "height":     1.5,
+      "image_path": null,
+      "prev_line":  true,
+      "offset":     3.75,
+      "y_offset":   1.25
+    },
+    "id": "robot_drawing"
+  },
+  {
+    "type":    "Divider",
+    "options": {
+      "label": "Autonomous"
+    }
+  },
+  {
+    "type":    "Boolean",
+    "options": {
+      "label":     "Didn't Move"
+    },
+    "id": "auto_no_move"
+  },
+  {
+    "type":    "Boolean",
+    "options": {
+      "label": "Scored Low Boiler",
+      "prev_line": true
+    },
+    "id": "auto_scored_low"
+  },
+  {
+    "type":    "Boolean",
+    "options": {
+      "label":     "Triggered Hopper",
+      "prev_line": true
+    },
+    "id": "auto_triggered_hopper"
+  },
+  {
+    "type":    "Numbers",
+    "options": {
+      "label": "Scored High",
+      "tens":  5
+    },
+    "id": "auto_scored_high"
+  },
+  {
+    "type":    "HorizontalOptions",
+    "options": {
+      "label": "Gear Location",
+      "options":   [
+        "NA",
+        "Blr",
+        "Mid",
+        "RZ"
+      ]
+    },
+    "default": "NA",
+    "id": "auto_gear_location"
+  },
+  {
+    "type":    "Numbers",
+    "options": {
+      "label": "Gears Scored",
+      "ones":  3,
+      "prev_line": true
+    },
+    "id": "auto_gears_scored",
+      "prev_line": true
+  },
+  {
+    "type":    "Divider",
+    "options": {
+      "label": "Tele-Op"
+    }
+  },
+  {
+    "type":    "Numbers",
+    "options": {
+      "label":      "Placed Gears",
+      "tens":       1,
+      "note_space": true
+    },
+    "id": "tele_gears_scored"
+  },
+  {
+    "type":    "Numbers",
+    "options": {
+      "label":      "Gears from Near",
+      "tens":       1,
+      "note_space": true
+    },
+    "id": "tele_gears_from_near"
+  },
+  {
+    "type":    "Numbers",
+    "options": {
+      "label": "Gears from Far",
+      "tens":       1,
+      "note_space": true
+    },
+    "id": "tele_gears_from_far"
+  },
+  {
+    "type":    "HorizontalOptions",
+    "options": {
+      "label": "Scored High",
+      "options":   [
+        ["💩", 0],
+        ["👎", 1],
+        ["👍", 2],
+        ["🔥", 3]
+      ]
+    },
+    "id": "tele_scored_high",
+    "default": "NA"
+  },
+  {
+    "type":    "Divider",
+    "options": {
+      "label": "Overall Performance"
+    }
+  },
+  {
+    "type":    "Boolean",
+    "options": {
+      "label": "Stopped Moving"
+    },
+    "id": "disabled"
+  },
+  {
+    "type":    "Boolean",
+    "options": {
+      "label":     "Never Moved",
+      "prev_line": true
+    },
+    "id": "no_move"
+  },
+  {
+    "type":    "Boolean",
+    "options": {
+      "label":     "No Show",
+      "prev_line": true
+    },
+    "id": "no_show"
+  },
+  {
+    "type":    "HorizontalOptions",
+    "options": {
+      "label":   "Climbed",
+      "options": [
+        ["S", 1],
+        ["F", 0]
+      ]
+    },
+    "id": "tele_climbed",
+    "default": "NA"
+  },
+  {
+    "type":    "HorizontalOptions",
+    "options": {
+      "label":     "Defense",
+      "options":   [
+        ["💩", 0],
+        ["👎", 1],
+        ["👍", 2],
+        ["🔥", 3]
+      ],
+      "prev_line": true
+    },
+    "id": "tele_defense",
+    "default": ""
+  },
+  {
+    "type":    "Image",
+    "options": {
+      "label":      "Notes",
+      "width":      5.625,
+      "height":     2.5,
+      "image_path": null
+    },
+    "id": "notes"
+  }
+]
