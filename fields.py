@@ -24,8 +24,8 @@ positions = ["Red 1",
              "Blue 2",
              "Blue 3"]
 
-SHEET_WIDTH = 8.5  # 8.375
-SHEET_HEIGHT = 11  # 10.875
+SHEET_WIDTH = 8.5
+SHEET_HEIGHT = 11
 
 
 def get_dump_filename(config):
@@ -408,6 +408,8 @@ class Markers(Field):
         Field.__init__(self)
         canvas.setFillColor(config["marker_colour"])
         draw_square(canvas, 0, 0, config["marker_size"], outline=False, infill=True)
+        draw_square(canvas, SHEET_WIDTH - config["marker_size"], 0, config["marker_size"], outline=False, infill=True)
+        draw_square(canvas, 0, SHEET_HEIGHT - config["marker_size"], config["marker_size"], outline=False, infill=True)
         draw_square(canvas, SHEET_WIDTH - config["marker_size"], SHEET_HEIGHT - config["marker_size"],
                     config["marker_size"],
                     outline=False, infill=True)
