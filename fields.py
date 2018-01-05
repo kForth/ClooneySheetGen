@@ -1,8 +1,8 @@
 import re
 
-from reportlab.lib import colors
+from reportlab.lib.colors import Color, black
 
-from draw_functions import *
+import draw_functions as draw
 
 numbers = [[True, True, True, False, True, True, True],  # 0
            [False, False, True, False, False, True, False],  # 1
@@ -165,7 +165,7 @@ class Barcode(Field):
         binary = str(format(int(self.data), '#0' + str(length) + 'b'))[2:]
         x_offset = 0
         for i in range(len(binary)-1, 0, -1):
-            draw_square(canvas, x_pos + x_offset, y_pos, config["box_size"], outline=1, infill=int(binary[i]))
+            draw.box(canvas, x_pos + x_offset, y_pos, config["box_size"], stroke=1, fill=int(binary[i]), fill_color=black)
             x_offset -= config["box_size"] + config["box_spacing"] / 4
 
         return config["box_size"]
@@ -196,14 +196,14 @@ class HorizontalOptions(Field):
 
     def draw(self, canvas, x_pos, y_pos, config, dump_info=True):
         x_offset = self.offset
-        draw_string(canvas, x_pos + x_offset, y_pos + ((config["box_size"] - config["font_size"]) / 2.0),
+        draw.string(canvas, x_pos + x_offset, y_pos + ((config["box_size"] - config["font_size"]) / 2.0),
                     self.label + (":" if not self.label == "" else ""), config["font_size"])
 
         if self.note_space:
             x = x_pos + config["label_offset"]
-            draw_rect(canvas, x, y_pos,
-                      self.note_width * (config["box_size"] + config["box_spacing"]) + config["box_size"],
-                      config["box_size"])
+            draw.rectangle(canvas, x, y_pos,
+                           self.note_width * (config["box_size"] + config["box_spacing"]) + config["box_size"],
+                           config["box_size"])
             x_pos += (1 + self.note_width) * (config["box_size"] + config["box_spacing"])
 
         x_offset += config["label_offset"]
@@ -221,7 +221,7 @@ class HorizontalOptions(Field):
                 continue
             if o == "_":
                 o = " "
-            draw_square(canvas, x_pos + x_offset, y_pos, config["box_size"], label=str(o), font_size=font_size)
+            draw.box(canvas, x_pos + x_offset, y_pos, config["box_size"], label=str(o), font_size=font_size)
             x_offset += config["box_spacing"] + config["box_size"]
 
         return config["font_size"] + config["y_spacing"]
@@ -258,11 +258,11 @@ class BulkOptions(Field):
         if self.prev_line:
             y_pos -= 2.74 * (config["font_size"] + config["y_spacing"])
             x_pos += 4
-        draw_string(canvas, x_pos, y_pos + ((config["box_size"] - config["font_size"]) / 2.0), self.label + ":",
+        draw.string(canvas, x_pos, y_pos + ((config["box_size"] - config["font_size"]) / 2.0), self.label + ":",
                     config["font_size"])
         x_offset = 1
         for i in range(len(self.labels)):
-            draw_string(canvas, x_pos + x_offset + (config["box_spacing"] + config["box_size"]) * i,
+            draw.string(canvas, x_pos + x_offset + (config["box_spacing"] + config["box_size"]) * i,
                         y_pos + ((config["box_size"] - config["font_size"]) / 2.0), self.labels[i], config["font_size"])
         y_pos += config["font_size"] + config["box_spacing"]
         for i in range(len(self.labels)):
@@ -275,8 +275,8 @@ class BulkOptions(Field):
                 if o == ',':
                     x_offset += config["box_spacing"]
                     continue
-                draw_square(canvas, x_pos + x_offset, y_pos + j * (config["y_spacing"] + config["box_spacing"]),
-                            config["box_size"], label=o, font_size=config["box_font_size"])
+                draw.box(canvas, x_pos + x_offset, y_pos + j * (config["y_spacing"] + config["box_spacing"]),
+                         config["box_size"], label=o, font_size=config["box_font_size"])
             x_offset += config["box_spacing"] + config["box_size"]
 
         if self.prev_line:
@@ -344,15 +344,15 @@ class Image(Field):
         if self.prev_line:
             x_pos += self.offset
             y_pos -= self.y_offset + 0.2375
-            draw_string(canvas, x_pos + 1,
+            draw.string(canvas, x_pos + 1,
                         y_pos + ((config["box_size"] - config["font_size"]) / 2.0) - config["y_spacing"],
                         self.label + ":", config["font_size"])
         else:
-            draw_string(canvas, x_pos, y_pos + ((config["box_size"] - config["font_size"]) / 2.0), self.label + ":",
+            draw.string(canvas, x_pos, y_pos + ((config["box_size"] - config["font_size"]) / 2.0), self.label + ":",
                         config["font_size"])
-        draw_rect(canvas, x_pos + 1, y_pos, self.width, self.height)
+        draw.rectangle(canvas, x_pos + 1, y_pos, self.width, self.height)
         if self.image_path is not None:
-            draw_image(canvas, x_pos + 1, y_pos, self.width, self.height, self.image_path)
+            draw.image(canvas, x_pos + 1, y_pos, self.width, self.height, self.image_path)
 
         if self.prev_line:
             return 0
@@ -386,14 +386,14 @@ class Divider(Field):
         if self.label is None:
             return config["y_spacing"]
         if self.label == "-":
-            draw_rect(canvas, config["marker_size"], y_pos, SHEET_WIDTH - (config["marker_size"] * 2),
-                      config["divider_height"])
+            draw.rectangle(canvas, config["marker_size"], y_pos, SHEET_WIDTH - (config["marker_size"] * 2),
+                           config["divider_height"])
             return
         else:
-            draw_string(canvas, config["marker_size"] + 0.25, y_pos, self.label, config["font_size"] * 1.5)
-            draw_rect(canvas, config["marker_size"] + 0.125, y_pos + (config["font_size"] * 1.5),
-                      SHEET_WIDTH - (config["marker_size"] * 2) - 0.25, config["divider_height"], outline=False,
-                      infill=True)
+            draw.string(canvas, config["marker_size"] + 0.25, y_pos, self.label, config["font_size"] * 1.5)
+            draw.rectangle(canvas, config["marker_size"] + 0.125, y_pos + (config["font_size"] * 1.5),
+                           SHEET_WIDTH - (config["marker_size"] * 2) - 0.25, config["divider_height"], stroke=False,
+                           fill=True)
             return config["font_size"] * 1.5 + config["divider_height"] + config["y_spacing"]
 
     def get_type(self):
@@ -406,16 +406,26 @@ class Divider(Field):
 class Markers(Field):
     def draw(self, canvas, config):
         Field.__init__(self)
-        canvas.setFillColor(config["marker_colour"])
-        draw_square(canvas, 0, 0, config["marker_size"], outline=False, infill=True)
-        draw_square(canvas, SHEET_WIDTH - config["marker_size"], 0, config["marker_size"], outline=False, infill=True)
-        draw_square(canvas, 0, SHEET_HEIGHT - config["marker_size"], config["marker_size"], outline=False, infill=True)
-        draw_square(canvas, SHEET_WIDTH - config["marker_size"], SHEET_HEIGHT - config["marker_size"],
-                    config["marker_size"],
-                    outline=False, infill=True)
-        canvas.setFillColor(colors.black)
-        draw_rect(canvas, config["marker_size"], config["marker_size"], SHEET_WIDTH - config["marker_size"] * 2,
-                  SHEET_HEIGHT - config["marker_size"] * 2)
+        marker_color = Color(*config["marker_colour"], alpha=1.0)
+        draw.box(canvas,
+                 0,
+                 0,
+                 config["marker_size"], stroke=0, fill=1, fill_color=marker_color)
+        draw.box(canvas,
+                 SHEET_WIDTH - config["marker_size"],
+                 0,
+                 config["marker_size"], stroke=0, fill=1, fill_color=marker_color)
+        draw.box(canvas,
+                 0,
+                 SHEET_HEIGHT - config["marker_size"],
+                 config["marker_size"], stroke=0, fill=1, fill_color=marker_color)
+        draw.box(canvas,
+                 SHEET_WIDTH - config["marker_size"],
+                 SHEET_HEIGHT - config["marker_size"],
+                 config["marker_size"], stroke=0, fill=1, fill_color=marker_color)
+        draw.rectangle(canvas, config["marker_size"], config["marker_size"],
+                       SHEET_WIDTH - config["marker_size"] * 2,
+                       SHEET_HEIGHT - config["marker_size"] * 2)
 
     def get_type(self):
         return "Markers"
@@ -434,15 +444,15 @@ class SevenSegment(Field):
     def draw(self, canvas, x_pos, y_pos, config):
         width = config["seven_segment_width"]
         thickness = config["seven_segment_thickness"]
-        draw_rect(canvas, x_pos + thickness, y_pos, width, thickness, infill=numbers[self.value][0])
-        draw_rect(canvas, x_pos, y_pos + thickness, thickness, width, infill=numbers[self.value][1])
-        draw_rect(canvas, x_pos + thickness + width, y_pos + thickness, thickness, width, infill=numbers[self.value][2])
-        draw_rect(canvas, x_pos + thickness, y_pos + thickness + width, width, thickness, infill=numbers[self.value][3])
-        draw_rect(canvas, x_pos, y_pos + thickness * 2 + width, thickness, width, infill=numbers[self.value][4])
-        draw_rect(canvas, x_pos + thickness + width, y_pos + thickness * 2 + width, thickness, width,
-                  infill=numbers[self.value][5])
-        draw_rect(canvas, x_pos + thickness, y_pos + width * 2 + thickness * 2, width, thickness,
-                  infill=numbers[self.value][6])
+        draw.rectangle(canvas, x_pos + thickness, y_pos, width, thickness, fill=numbers[self.value][0])
+        draw.rectangle(canvas, x_pos, y_pos + thickness, thickness, width, fill=numbers[self.value][1])
+        draw.rectangle(canvas, x_pos + thickness + width, y_pos + thickness, thickness, width, fill=numbers[self.value][2])
+        draw.rectangle(canvas, x_pos + thickness, y_pos + thickness + width, width, thickness, fill=numbers[self.value][3])
+        draw.rectangle(canvas, x_pos, y_pos + thickness * 2 + width, thickness, width, fill=numbers[self.value][4])
+        draw.rectangle(canvas, x_pos + thickness + width, y_pos + thickness * 2 + width, thickness, width,
+                       fill=numbers[self.value][5])
+        draw.rectangle(canvas, x_pos + thickness, y_pos + width * 2 + thickness * 2, width, thickness,
+                       fill=numbers[self.value][6])
         return width * 2 + thickness * 3 + config["y_spacing"]
 
     def get_type(self):
@@ -470,7 +480,7 @@ class Digits(Field):
 
     def draw(self, canvas, x_pos, y_pos, config):
         if not self.label[0] == "-":
-            draw_string(canvas, x_pos, y_pos, self.label + ":", config["font_size"])
+            draw.string(canvas, x_pos, y_pos, self.label + ":", config["font_size"])
             for i in range(self.digits):
                 SevenSegment(value=int(self.values.split(" ")[i])).draw(canvas,
                                                                         x_pos + 1 + config["seven_segment_offset"] * i,
@@ -480,7 +490,7 @@ class Digits(Field):
                 SevenSegment(value=int(self.values.split(" ")[i])).draw(canvas,
                                                                         x_pos + config["seven_segment_offset"] * i,
                                                                         y_pos, config)
-            draw_string(canvas, x_pos,
+            draw.string(canvas, x_pos,
                         y_pos + config["seven_segment_width"] * 2 + config["seven_segment_thickness"] * 3 + config[
                             "y_spacing"], "Team #: __________", config["font_size"])
         else:
@@ -488,7 +498,7 @@ class Digits(Field):
                 SevenSegment(value=int(self.values.split(" ")[i])).draw(canvas,
                                                                         x_pos + config["seven_segment_offset"] * i,
                                                                         y_pos, config)
-            draw_string(canvas, x_pos,
+            draw.string(canvas, x_pos,
                         y_pos + config["seven_segment_width"] * 2 + config["seven_segment_thickness"] * 3 + config[
                             "box_spacing"], re.sub(r"(?<=\w)([A-Z])", r" \1", self.label[1:]), config["font_size"])
 
@@ -518,7 +528,7 @@ class String(Field):
         font_size = self.font_size
         if font_size == -1:
             font_size = config["font_size"]
-        draw_string(canvas, x_pos, y_pos, self.string, font_size)
+        draw.string(canvas, x_pos, y_pos, self.string, font_size)
         if not self.pos == (0, 0):
             return 0
         else:
