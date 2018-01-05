@@ -148,6 +148,7 @@ class Barcode(Field):
         self.label = label
         self.data = data
         self.digits = digits
+        self._length = len(bin(int("9" * self.digits))[2:]) - 3
 
     def get_info(self):
         return {
@@ -161,18 +162,30 @@ class Barcode(Field):
     def get_type(self):
         return "Barcode"
 
-    def draw(self, canvas, x_pos, y_pos, config):
-        length = len(bin(int("9" * self.digits))[2:])
-        binary = str(format(int(self.data), '#0' + str(length) + 'b'))[2:]
-        x_offset = 0
-        width = (config['box_size'] + config['barcode_spacing']) * (length - 3)
-        draw.rectangle(canvas, x_pos - width, y_pos, width, config['box_size'])
-        for i in range(len(binary) - 1, 0, -1):
-            draw.box(canvas, x_pos + x_offset, y_pos, config["box_size"], stroke=0, fill=int(binary[i]),
-                     fill_color=black)
+    def get_height(self, config):
+        return config["box_size"]
+
+    def _iter(self, img, x_pos, y_pos, config, func, *args, **kwargs):
+        x_offset = -config['box_size']
+        for i in range(self._length, 0, -1):
+            func(
+                    img,
+                    x_pos + x_offset,
+                    y_pos,
+                    config["box_size"],
+                    *[e(i) if callable(e) else e for e in args],
+                    **dict([(k, v(i) if callable(v) else v) for k, v in kwargs.items()])
+                 )
             x_offset -= config["box_size"] + config["barcode_spacing"]
 
-        return config["box_size"]
+    def draw(self, canvas, x_pos, y_pos, config):
+        binary = str(format(int(self.data), '#0' + str(self._length) + 'b'))[2:]
+        width = (config['box_size'] + config['barcode_spacing']) * self._length
+        draw.rectangle(canvas, x_pos - width, y_pos, width, config['box_size'])
+        self._iter(canvas, x_pos, y_pos, config, draw.box, stroke=0, fill_color=black,
+                   fill=lambda i: (int(binary[i]) if i < len(binary) else 0))
+
+        return self.get_height(config)
 
 
 class HorizontalOptions(Field):
