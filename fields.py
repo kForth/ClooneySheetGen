@@ -17,12 +17,14 @@ numbers = [[True, True, True, False, True, True, True],  # 0
            [False, True, False, False, True, False, False],  # Alternate 1
            [False, False, False, False, False, False, False]]  # Blank
 
-positions = ["Red 1",
-             "Red 2",
-             "Red 3",
-             "Blue 1",
-             "Blue 2",
-             "Blue 3"]
+positions = [
+    "Red 1",
+    "Red 2",
+    "Red 3",
+    "Blue 1",
+    "Blue 2",
+    "Blue 3"
+]
 
 SHEET_WIDTH = 8.5
 SHEET_HEIGHT = 11
@@ -58,12 +60,12 @@ class Header(Field):
 
     def draw(self, canvas, x_pos, y_pos, config):
         String("Celt-X Team 5406", font_size=0.5).draw(canvas, 0.05 + config["marker_size"],
-                                                            0.05 + config["marker_size"], config)
+                                                       0.05 + config["marker_size"], config)
         String("Clooney Scouting System", font_size=3.0 / 32).draw(canvas, 3 + config["marker_size"],
                                                                    0.5 + config["marker_size"], config)
         String(config["event"], font_size=3.0 / 32).draw(canvas, 0.125 + config["marker_size"],
                                                          0.5 + config["marker_size"], config)
-        String("Match " + str(self.match) + "    " + positions[self.pos] + "    Scout: _______", font_size=0.25)\
+        String("Match " + str(self.match) + "    " + positions[self.pos] + "    Scout: _______", font_size=0.25) \
             .draw(canvas, 0.125 + config["marker_size"], 0.625 + config["marker_size"], config)
 
         match_pos_string = str(self.match)
@@ -120,7 +122,7 @@ class BoxNumber(Field):
 
     def get_info(self):
         return {
-            "label": self.label,
+            "label":  self.label,
             "digits": self.digits
         }
 
@@ -149,7 +151,7 @@ class Barcode(Field):
 
     def get_info(self):
         return {
-            "label": self.label,
+            "label":  self.label,
             "digits": self.digits
         }
 
@@ -160,13 +162,15 @@ class Barcode(Field):
         return "Barcode"
 
     def draw(self, canvas, x_pos, y_pos, config):
-        x_pos -= config["box_size"]
         length = len(bin(int("9" * self.digits))[2:])
         binary = str(format(int(self.data), '#0' + str(length) + 'b'))[2:]
         x_offset = 0
-        for i in range(len(binary)-1, 0, -1):
-            draw.box(canvas, x_pos + x_offset, y_pos, config["box_size"], stroke=1, fill=int(binary[i]), fill_color=black)
-            x_offset -= config["box_size"] + config["box_spacing"] / 4
+        width = (config['box_size'] + config['barcode_spacing']) * (length - 3)
+        draw.rectangle(canvas, x_pos - width, y_pos, width, config['box_size'])
+        for i in range(len(binary) - 1, 0, -1):
+            draw.box(canvas, x_pos + x_offset, y_pos, config["box_size"], stroke=0, fill=int(binary[i]),
+                     fill_color=black)
+            x_offset -= config["box_size"] + config["barcode_spacing"]
 
         return config["box_size"]
 
@@ -183,12 +187,12 @@ class HorizontalOptions(Field):
 
     def get_info(self):
         return {
-            "label": self.label,
-            "options": self.options,
-            "offset": self.offset,
+            "label":      self.label,
+            "options":    self.options,
+            "offset":     self.offset,
             "note_space": self.note_space,
             "note_width": self.note_width,
-            "type": self.get_type()
+            "type":       self.get_type()
         }
 
     def get_label(self):
@@ -246,9 +250,9 @@ class BulkOptions(Field):
 
     def get_info(self):
         return {
-            "label": self.label,
+            "label":   self.label,
             "options": self.options,
-            "labels": self.labels
+            "labels":  self.labels
         }
 
     def get_label(self):
@@ -326,11 +330,11 @@ class Image(Field):
 
     def get_info(self):
         return {
-            "label": self.label,
-            "width": self.width,
-            "height": self.height,
-            "offset": self.width,
-            "y_offset": self.width,
+            "label":     self.label,
+            "width":     self.width,
+            "height":    self.height,
+            "offset":    self.width,
+            "y_offset":  self.width,
             "prev_line": self.prev_line
         }
 
@@ -446,8 +450,10 @@ class SevenSegment(Field):
         thickness = config["seven_segment_thickness"]
         draw.rectangle(canvas, x_pos + thickness, y_pos, width, thickness, fill=numbers[self.value][0])
         draw.rectangle(canvas, x_pos, y_pos + thickness, thickness, width, fill=numbers[self.value][1])
-        draw.rectangle(canvas, x_pos + thickness + width, y_pos + thickness, thickness, width, fill=numbers[self.value][2])
-        draw.rectangle(canvas, x_pos + thickness, y_pos + thickness + width, width, thickness, fill=numbers[self.value][3])
+        draw.rectangle(canvas, x_pos + thickness + width, y_pos + thickness, thickness, width,
+                       fill=numbers[self.value][2])
+        draw.rectangle(canvas, x_pos + thickness, y_pos + thickness + width, width, thickness,
+                       fill=numbers[self.value][3])
         draw.rectangle(canvas, x_pos, y_pos + thickness * 2 + width, thickness, width, fill=numbers[self.value][4])
         draw.rectangle(canvas, x_pos + thickness + width, y_pos + thickness * 2 + width, thickness, width,
                        fill=numbers[self.value][5])
@@ -471,7 +477,7 @@ class Digits(Field):
 
     def get_info(self):
         return {
-            "label": self.label,
+            "label":  self.label,
             "digits": self.digits
         }
 
