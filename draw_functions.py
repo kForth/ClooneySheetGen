@@ -1,32 +1,39 @@
+from reportlab.lib import colors
 from reportlab.lib.units import inch
 
 
-def draw_rect(canvas, x_pos, y_pos, width, height, outline=1, infill=0):
+def rectangle(canvas, x_pos, y_pos, width, height, stroke=1, fill=0, fill_color=colors.grey, stroke_color=colors.grey):
     y_pos = (11 * inch) - (y_pos * inch) - (height * inch)
     x_pos = x_pos * inch
-    canvas.rect(x_pos, y_pos, width * inch, height * inch, stroke=outline, fill=infill)
+    canvas.setFillColor(fill_color)
+    canvas.setStrokeColor(stroke_color)
+    canvas.rect(x_pos, y_pos, width * inch, height * inch, stroke=stroke, fill=fill)
 
 
-def draw_square(canvas, x_pos, y_pos, size, outline=1, infill=0, label="", font_size=0.15):
-    draw_rect(canvas, x_pos, y_pos, size, size, outline, infill)
-    draw_centered_string(canvas, x_pos + (size / 2), y_pos + (size / 2.0) - (font_size / 2.0), label, font_size)
+def box(canvas, x_pos, y_pos, size, stroke=1, fill=0, label="", font_size=0.15, fill_color=colors.grey, stroke_color=colors.grey):
+    rectangle(canvas, x_pos, y_pos, size, size, stroke, fill, fill_color, stroke_color)
+    centered_string(canvas, x_pos + (size / 2), y_pos + (size / 2.0) - (font_size / 2.0), label, font_size, fill_color)
 
 
-def draw_centered_string(canvas, x_pos, y_pos, text, font_size):
+def centered_string(canvas, x_pos, y_pos, text, font_size, fill_color=colors.grey):
+    canvas.setFillColor(fill_color)
     canvas.setFontSize(font_size * inch)
     x_pos = x_pos * inch
     y_pos = (11 * inch) - (y_pos * inch) - (font_size * 0.8 * inch)
     canvas.drawCentredString(x_pos, y_pos, text)
 
 
-def draw_string(canvas, x_pos, y_pos, text, font_size):
+def string(canvas, x_pos, y_pos, text, font_size, fill_color=colors.grey):
+    canvas.setFillColor(fill_color)
     canvas.setFontSize(font_size * inch)
     x_pos = x_pos * inch
     y_pos = (11 * inch) - (y_pos * inch) - (font_size * 0.8 * inch)
     canvas.drawString(x_pos, y_pos, text)
 
 
-def draw_image(canvas, x_pos, y_pos, width, height, filepath):
+def image(canvas, x_pos, y_pos, width, height, filepath, fill_color=colors.grey):
+    canvas.setFillColor(fill_color)
     y_pos = (11 * inch) - (y_pos * inch) - (height * inch)
     x_pos = x_pos * inch
-    canvas.drawImage(filepath, x_pos, y_pos, width * inch, height * inch)
+    if filepath:
+        canvas.drawImage(filepath, x_pos, y_pos, width * inch, height * inch)
