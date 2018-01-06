@@ -1,4 +1,5 @@
 import re
+from abc import abstractmethod
 
 from reportlab.lib.colors import Color, black
 
@@ -38,6 +39,16 @@ class Field(object):
     def __init__(self):
         self.prev_line = False
         self.id = None
+
+    @abstractmethod
+    def _iter(self, *args, **kwargs):
+        pass
+
+    def draw(self, *args, **kwargs):
+        pass
+
+    def read(self, *args, **kwargs):
+        pass
 
     def set_id(self, data_id):
         self.id = data_id
