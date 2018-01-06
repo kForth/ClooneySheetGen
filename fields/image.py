@@ -18,8 +18,8 @@ class Image(FieldBase):
             "label":     self.label,
             "width":     self.width,
             "height":    self.height,
-            "offset":    self.width,
-            "y_offset":  self.width,
+            "offset":    self.offset,
+            "y_offset":  self.y_offset,
             "prev_line": self.prev_line
         }
 
