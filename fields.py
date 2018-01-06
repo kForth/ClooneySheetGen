@@ -45,6 +45,9 @@ class Field(object):
     def get_id(self):
         return self.id
 
+    def get_height(self, *args):
+        return 0
+
     def get_info(self):
         return None
 
@@ -77,13 +80,13 @@ class Header(Field):
         barcode.set_id("encoded_match_data")
         barcode_x = 8.5 - config["marker_size"]
         barcode_y = config["marker_size"]
-        barcode_height = barcode.draw(canvas, barcode_x, barcode_y, config)
+        barcode.draw(canvas, barcode_x, barcode_y, config)
 
         team_num = BoxNumber("Team Number")
         team_num.set_id("team_number")
         team_num_x = config["x_pos"] + config["marker_size"]
         team_num_y = 1.5
-        team_num_height = team_num.draw(canvas, team_num_x, team_num_y, config)
+        team_num.draw(canvas, team_num_x, team_num_y, config)
 
         box_bardcode_info = [
             {
@@ -92,7 +95,7 @@ class Header(Field):
                 "options": barcode.get_info(),
                 "x_pos":   barcode_x,
                 "y_pos":   barcode_y,
-                "height":  barcode_height
+                "height":  barcode.get_height(config)
             },
             {
                 "type":    team_num.get_type(),
@@ -100,12 +103,15 @@ class Header(Field):
                 "options": team_num.get_info(),
                 "x_pos":   team_num_x,
                 "y_pos":   team_num_y,
-                "height":  team_num_height
+                "height":  team_num.get_height(config)
 
             }
         ]
 
-        return team_num_height, box_bardcode_info
+        return self.get_height(config), box_bardcode_info
+
+    def get_height(self, config):
+        return BoxNumber("Team Number").get_height(config)
 
     def get_type(self):
         return "Header"
@@ -132,6 +138,9 @@ class BoxNumber(Field):
     def get_type(self):
         return "BoxNumber"
 
+    def get_height(self, config):
+        return config["y_spacing"] * (self.digits + 3.5)
+
     def draw(self, canvas, x_pos, y_pos, config):
         String("Team Number: ____________").draw(canvas, x_pos, y_pos + config["y_spacing"] / 2, config)
         y_pos += config["y_spacing"] * 2
@@ -139,7 +148,7 @@ class BoxNumber(Field):
             HorizontalOptions("1" + "0" * (self.digits - 1 - i) + "'s", range(0, 10)) \
                 .draw(canvas, x_pos, y_pos + config["y_spacing"] * (1.5 * i), config, False)
 
-        return config["y_spacing"] * (self.digits + 3.5)
+        return self.get_height(config)
 
 
 class Barcode(Field):
@@ -211,6 +220,12 @@ class HorizontalOptions(Field):
     def get_label(self):
         return self.label
 
+    def get_height(self, config):
+        return config["font_size"] + config["y_spacing"]
+
+    def _iter(self, img, x_pos, y_pos, config, func, *args, **kwargs):
+        pass
+
     def draw(self, canvas, x_pos, y_pos, config, dump_info=True):
         x_offset = self.offset
         draw.string(canvas, x_pos + x_offset, y_pos + ((config["box_size"] - config["font_size"]) / 2.0),
@@ -241,7 +256,7 @@ class HorizontalOptions(Field):
             draw.box(canvas, x_pos + x_offset, y_pos, config["box_size"], label=str(o), font_size=font_size)
             x_offset += config["box_spacing"] + config["box_size"]
 
-        return config["font_size"] + config["y_spacing"]
+        return self.get_height(config)
 
     def calc_width(self, config):
         width = config["label_offset"] + int(self.note_space) * (self.note_width + config["box_spacing"]) + \
@@ -271,6 +286,12 @@ class BulkOptions(Field):
     def get_label(self):
         return self.label
 
+    def get_height(self, config):
+        if self.prev_line:
+            return config["y_spacing"] + config["box_spacing"]
+        else:
+            return config["font_size"] * 2 + (config["y_spacing"] + config["box_spacing"]) * len(self.options)
+
     def draw(self, canvas, x_pos, y_pos, config):
         if self.prev_line:
             y_pos -= 2.74 * (config["font_size"] + config["y_spacing"])
@@ -296,10 +317,7 @@ class BulkOptions(Field):
                          config["box_size"], label=o, font_size=config["box_font_size"])
             x_offset += config["box_spacing"] + config["box_size"]
 
-        if self.prev_line:
-            return config["y_spacing"] + config["box_spacing"]
-        else:
-            return config["font_size"] * 2 + (config["y_spacing"] + config["box_spacing"]) * len(self.options)
+        return self.get_height(config)
 
     def get_type(self):
         return "BulkOptions"
@@ -323,8 +341,7 @@ class Numbers(HorizontalOptions):
         return d
 
     def draw(self, canvas, x_pos, y_pos, config, *args):
-        offset = HorizontalOptions.draw(self, canvas, x_pos, y_pos, config)
-        return offset
+        return HorizontalOptions.draw(self, canvas, x_pos, y_pos, config)
 
     def get_type(self):
         return "Numbers"
@@ -357,6 +374,12 @@ class Image(Field):
     def get_type(self):
         return "Image"
 
+    def get_height(self, config):
+        if self.prev_line:
+            return 0
+        else:
+            return self.height + config["y_spacing"]
+
     def draw(self, canvas, x_pos, y_pos, config):
         if self.prev_line:
             x_pos += self.offset
@@ -371,10 +394,7 @@ class Image(Field):
         if self.image_path is not None:
             draw.image(canvas, x_pos + 1, y_pos, self.width, self.height, self.image_path)
 
-        if self.prev_line:
-            return 0
-        else:
-            return self.height + config["y_spacing"]
+        return self.get_height(config)
 
 
 class Boolean(HorizontalOptions):
@@ -387,8 +407,7 @@ class Boolean(HorizontalOptions):
         return d
 
     def draw(self, canvas, x_pos, y_pos, config, *args):
-        HorizontalOptions.draw(self, canvas, x_pos, y_pos, config)
-        return config["font_size"] + config["y_spacing"]
+        return HorizontalOptions.draw(self, canvas, x_pos, y_pos, config)
 
     def get_type(self):
         return "Boolean"
@@ -399,19 +418,26 @@ class Divider(Field):
         Field.__init__(self)
         self.label = label
 
-    def draw(self, canvas, x_pos, y_pos, config):
+    def get_height(self, config):
         if self.label is None:
             return config["y_spacing"]
-        if self.label == "-":
+        elif self.label == "-":
+            return 0
+        else:
+            return config["font_size"] * 1.5 + config["divider_height"] + config["y_spacing"]
+
+    def draw(self, canvas, x_pos, y_pos, config):
+        if self.label is None:
+            pass
+        elif self.label == "-":
             draw.rectangle(canvas, config["marker_size"], y_pos, SHEET_WIDTH - (config["marker_size"] * 2),
                            config["divider_height"])
-            return
         else:
             draw.string(canvas, config["marker_size"] + 0.25, y_pos, self.label, config["font_size"] * 1.5)
             draw.rectangle(canvas, config["marker_size"] + 0.125, y_pos + (config["font_size"] * 1.5),
                            SHEET_WIDTH - (config["marker_size"] * 2) - 0.25, config["divider_height"], stroke=False,
                            fill=True)
-            return config["font_size"] * 1.5 + config["divider_height"] + config["y_spacing"]
+        return self.get_height(config)
 
     def get_type(self):
         return "Divider"
@@ -472,7 +498,10 @@ class SevenSegment(Field):
                        fill=numbers[self.value][5])
         draw.rectangle(canvas, x_pos + thickness, y_pos + width * 2 + thickness * 2, width, thickness,
                        fill=numbers[self.value][6])
-        return width * 2 + thickness * 3 + config["y_spacing"]
+        return self.get_height(config)
+
+    def get_height(self, config):
+        return config["seven_segment_width"] * 2 + config["seven_segment_thickness"] * 3 + config["y_spacing"]
 
     def get_type(self):
         return "SevenSegment"
@@ -493,9 +522,6 @@ class Digits(Field):
             "label":  self.label,
             "digits": self.digits
         }
-
-    def get_type(self):
-        return "Digits"
 
     def draw(self, canvas, x_pos, y_pos, config):
         if not self.label[0] == "-":
@@ -521,6 +547,12 @@ class Digits(Field):
                         y_pos + config["seven_segment_width"] * 2 + config["seven_segment_thickness"] * 3 + config[
                             "box_spacing"], re.sub(r"(?<=\w)([A-Z])", r" \1", self.label[1:]), config["font_size"])
 
+        return self.get_height(config)
+
+    def get_type(self):
+        return "Digits"
+
+    def get_height(self, config):
         return 0.6875 + config["y_spacing"]
 
     def get_label(self):
@@ -548,13 +580,16 @@ class String(Field):
         if font_size == -1:
             font_size = config["font_size"]
         draw.string(canvas, x_pos, y_pos, self.string, font_size)
+        return self.get_height(config)
+
+    def get_height(self, config):
         if not self.pos == (0, 0):
             return 0
         else:
             if self.height == "thin":
-                return font_size + config["y_spacing"] / 8
+                return self.font_size + config["y_spacing"] / 8
             else:
-                return font_size + config["y_spacing"]
+                return self.font_size + config["y_spacing"]
 
     def get_type(self):
         return "String"
