@@ -188,14 +188,14 @@ class Barcode(Field):
     def _iter(self, img, x_pos, y_pos, config, func, *args, **kwargs):
         x_offset = -config['box_size']
         for i in range(self._length, 0, -1):
-            func(
+            yield func(
                     img,
                     x_pos + x_offset,
                     y_pos,
                     config["box_size"],
                     *[e(i) if callable(e) else e for e in args],
                     **dict([(k, v(i) if callable(v) else v) for k, v in kwargs.items()])
-                 )
+            )
             x_offset -= config["box_size"] + config["barcode_spacing"]
 
     def draw(self, canvas, x_pos, y_pos, config):
