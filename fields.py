@@ -495,20 +495,46 @@ class SevenSegment(Field):
             value = 11
         self.value = value
 
-    def draw(self, canvas, x_pos, y_pos, config):
+    def _iter(self, img, x_pos, y_pos, config, func, *args, **kwargs):
         width = config["seven_segment_width"]
         thickness = config["seven_segment_thickness"]
-        draw.rectangle(canvas, x_pos + thickness, y_pos, width, thickness, fill=numbers[self.value][0])
-        draw.rectangle(canvas, x_pos, y_pos + thickness, thickness, width, fill=numbers[self.value][1])
-        draw.rectangle(canvas, x_pos + thickness + width, y_pos + thickness, thickness, width,
-                       fill=numbers[self.value][2])
-        draw.rectangle(canvas, x_pos + thickness, y_pos + thickness + width, width, thickness,
-                       fill=numbers[self.value][3])
-        draw.rectangle(canvas, x_pos, y_pos + thickness * 2 + width, thickness, width, fill=numbers[self.value][4])
-        draw.rectangle(canvas, x_pos + thickness + width, y_pos + thickness * 2 + width, thickness, width,
-                       fill=numbers[self.value][5])
-        draw.rectangle(canvas, x_pos + thickness, y_pos + width * 2 + thickness * 2, width, thickness,
-                       fill=numbers[self.value][6])
+        yield func(img, x_pos + thickness, y_pos, width, thickness,
+                   *[e(0) if callable(e) else e for e in args],
+                   **dict([(k, v(0) if callable(v) else v) for k, v in kwargs.items()]))
+        yield func(img, x_pos, y_pos + thickness, thickness, width,
+                   *[e(1) if callable(e) else e for e in args],
+                   **dict([(k, v(1) if callable(v) else v) for k, v in kwargs.items()]))
+        yield func(img, x_pos + thickness + width, y_pos + thickness, thickness, width,
+                   *[e(2) if callable(e) else e for e in args],
+                   **dict([(k, v(2) if callable(v) else v) for k, v in kwargs.items()]))
+        yield func(img, x_pos + thickness, y_pos + thickness + width, width, thickness,
+                   *[e(3) if callable(e) else e for e in args],
+                   **dict([(k, v(3) if callable(v) else v) for k, v in kwargs.items()]))
+        yield func(img, x_pos, y_pos + thickness * 2 + width, thickness, width,
+                   *[e(4) if callable(e) else e for e in args],
+                   **dict([(k, v(4) if callable(v) else v) for k, v in kwargs.items()]))
+        yield func(img, x_pos + thickness + width, y_pos + thickness * 2 + width, thickness, width,
+                   *[e(5) if callable(e) else e for e in args],
+                   **dict([(k, v(5) if callable(v) else v) for k, v in kwargs.items()]))
+        yield func(img, x_pos + thickness, y_pos + width * 2 + thickness * 2, width, thickness,
+                   *[e(6) if callable(e) else e for e in args],
+                   **dict([(k, v(6) if callable(v) else v) for k, v in kwargs.items()]))
+
+    def draw(self, canvas, x_pos, y_pos, config):
+        self._iter(canvas, x_pos, y_pos, config, draw.rectangle, fill=lambda i: numbers[self.value][i])
+        # width = config["seven_segment_width"]
+        # thickness = config["seven_segment_thickness"]
+        # draw.rectangle(canvas, x_pos + thickness, y_pos, width, thickness, fill=numbers[self.value][0])
+        # draw.rectangle(canvas, x_pos, y_pos + thickness, thickness, width, fill=numbers[self.value][1])
+        # draw.rectangle(canvas, x_pos + thickness + width, y_pos + thickness, thickness, width,
+        #                fill=numbers[self.value][2])
+        # draw.rectangle(canvas, x_pos + thickness, y_pos + thickness + width, width, thickness,
+        #                fill=numbers[self.value][3])
+        # draw.rectangle(canvas, x_pos, y_pos + thickness * 2 + width, thickness, width, fill=numbers[self.value][4])
+        # draw.rectangle(canvas, x_pos + thickness + width, y_pos + thickness * 2 + width, thickness, width,
+        #                fill=numbers[self.value][5])
+        # draw.rectangle(canvas, x_pos + thickness, y_pos + width * 2 + thickness * 2, width, thickness,
+        #                fill=numbers[self.value][6])
         return self.get_height(config)
 
     def get_height(self, config):
