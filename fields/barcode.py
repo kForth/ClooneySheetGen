@@ -36,6 +36,9 @@ class Barcode(FieldBase):
             x_offset -= config["box_size"] + config["barcode_spacing"]
         return values
 
+    def read(self, img, x_pos, y_pos, config):
+        return self._iter(img, x_pos * config['x_factor'], y_pos * config['y_factor'], config, self._read_box)
+
     def draw(self, canvas, x_pos, y_pos, config):
         binary = str(format(int(self.data), '#0' + str(self._length) + 'b'))[2:][::-1]
         width = (config['box_size'] + config['barcode_spacing']) * self._length - config['barcode_spacing']

@@ -1,5 +1,7 @@
 from abc import abstractmethod
 
+import numpy as np
+
 
 class FieldBase(object):
     SHEET_WIDTH = 8.5
@@ -21,6 +23,11 @@ class FieldBase(object):
     @abstractmethod
     def draw(self, canvas, x_pos, y_pos, config):
         pass
+
+    def _read_box(self, img, x_pos, y_pos, width, height, min_val=50):
+        crop = img[y_pos:y_pos + height, x_pos:x_pos + width]
+        avg = crop.sum() / (3 * crop.size)
+        return avg < min_val
 
     # @abstractmethod
     # def read(self, img, x_pos, y_pos, config):
