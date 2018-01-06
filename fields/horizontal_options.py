@@ -1,5 +1,5 @@
 import draw_functions as draw
-from fields.fieldbase import FieldBase
+from fields._base import FieldBase
 
 
 class HorizontalOptions(FieldBase):
@@ -22,11 +22,12 @@ class HorizontalOptions(FieldBase):
             "type":       self.get_type()
         }
 
-    def get_label(self):
-        return self.label
-
     def get_height(self, config):
         return config["font_size"] + config["y_spacing"]
+
+    def get_width(self, config):
+        return config["label_offset"] + int(self.note_space) * (self.note_width + config["box_spacing"]) + \
+               (config["box_size"] + config["box_spacing"]) * len(self.options)
 
     def _iter(self, img, x_pos, y_pos, config, func, *args, **kwargs):
         pass
@@ -62,12 +63,3 @@ class HorizontalOptions(FieldBase):
             x_offset += config["box_spacing"] + config["box_size"]
 
         return self.get_height(config)
-
-    def calc_width(self, config):
-        width = config["label_offset"] + int(self.note_space) * (self.note_width + config["box_spacing"]) + \
-                (config["box_size"] + config["box_spacing"]) * len(self.options)
-
-        return width
-
-    def get_type(self):
-        return self.__class__.__name__

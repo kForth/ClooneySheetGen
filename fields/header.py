@@ -1,4 +1,4 @@
-from fields.fieldbase import FieldBase
+from fields._base import FieldBase
 from fields.string import String
 from fields.barcode  import Barcode
 from fields.box_number import BoxNumber
@@ -43,7 +43,7 @@ class Header(FieldBase):
         team_num = BoxNumber("Team Number")
         team_num.set_id("team_number")
         team_num_x = config["x_pos"] + config["marker_size"]
-        team_num_y = 1.5
+        team_num_y = 1.25
         team_num.draw(canvas, team_num_x, team_num_y, config)
 
         box_bardcode_info = [
@@ -70,9 +70,3 @@ class Header(FieldBase):
 
     def get_height(self, config):
         return BoxNumber("Team Number").get_height(config)
-
-    def get_type(self):
-        return self.__class__.__name__
-
-    def get_label(self):
-        return None

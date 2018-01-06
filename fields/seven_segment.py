@@ -1,5 +1,5 @@
 import draw_functions as draw
-from fields.fieldbase import FieldBase
+from fields._base import FieldBase
 
 
 class SevenSegment(FieldBase):
@@ -25,27 +25,28 @@ class SevenSegment(FieldBase):
     def _iter(self, img, x_pos, y_pos, config, func, *args, **kwargs):
         width = config["seven_segment_width"]
         thickness = config["seven_segment_thickness"]
-        yield func(img, x_pos + thickness, y_pos, width, thickness,
+        values = []
+        values.append(func(img, x_pos + thickness, y_pos, width, thickness,
                    *[e(0) if callable(e) else e for e in args],
-                   **dict([(k, v(0) if callable(v) else v) for k, v in kwargs.items()]))
-        yield func(img, x_pos, y_pos + thickness, thickness, width,
+                   **dict([(k, v(0) if callable(v) else v) for k, v in kwargs.items()])))
+        values.append(func(img, x_pos, y_pos + thickness, thickness, width,
                    *[e(1) if callable(e) else e for e in args],
-                   **dict([(k, v(1) if callable(v) else v) for k, v in kwargs.items()]))
-        yield func(img, x_pos + thickness + width, y_pos + thickness, thickness, width,
+                   **dict([(k, v(1) if callable(v) else v) for k, v in kwargs.items()])))
+        values.append(func(img, x_pos + thickness + width, y_pos + thickness, thickness, width,
                    *[e(2) if callable(e) else e for e in args],
-                   **dict([(k, v(2) if callable(v) else v) for k, v in kwargs.items()]))
-        yield func(img, x_pos + thickness, y_pos + thickness + width, width, thickness,
+                   **dict([(k, v(2) if callable(v) else v) for k, v in kwargs.items()])))
+        values.append(func(img, x_pos + thickness, y_pos + thickness + width, width, thickness,
                    *[e(3) if callable(e) else e for e in args],
-                   **dict([(k, v(3) if callable(v) else v) for k, v in kwargs.items()]))
-        yield func(img, x_pos, y_pos + thickness * 2 + width, thickness, width,
+                   **dict([(k, v(3) if callable(v) else v) for k, v in kwargs.items()])))
+        values.append(func(img, x_pos, y_pos + thickness * 2 + width, thickness, width,
                    *[e(4) if callable(e) else e for e in args],
-                   **dict([(k, v(4) if callable(v) else v) for k, v in kwargs.items()]))
-        yield func(img, x_pos + thickness + width, y_pos + thickness * 2 + width, thickness, width,
+                   **dict([(k, v(4) if callable(v) else v) for k, v in kwargs.items()])))
+        values.append(func(img, x_pos + thickness + width, y_pos + thickness * 2 + width, thickness, width,
                    *[e(5) if callable(e) else e for e in args],
-                   **dict([(k, v(5) if callable(v) else v) for k, v in kwargs.items()]))
-        yield func(img, x_pos + thickness, y_pos + width * 2 + thickness * 2, width, thickness,
+                   **dict([(k, v(5) if callable(v) else v) for k, v in kwargs.items()])))
+        values.append(func(img, x_pos + thickness, y_pos + width * 2 + thickness * 2, width, thickness,
                    *[e(6) if callable(e) else e for e in args],
-                   **dict([(k, v(6) if callable(v) else v) for k, v in kwargs.items()]))
+                   **dict([(k, v(6) if callable(v) else v) for k, v in kwargs.items()])))
 
     def draw(self, canvas, x_pos, y_pos, config):
         self._iter(canvas, x_pos, y_pos, config, draw.rectangle, fill=lambda i: self.NUMBERS[self.value][i])
@@ -66,9 +67,3 @@ class SevenSegment(FieldBase):
 
     def get_height(self, config):
         return config["seven_segment_width"] * 2 + config["seven_segment_thickness"] * 3 + config["y_spacing"]
-
-    def get_type(self):
-        return self.__class__.__name__
-
-    def get_label(self):
-        return None

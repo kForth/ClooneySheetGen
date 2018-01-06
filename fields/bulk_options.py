@@ -1,5 +1,5 @@
 import draw_functions as draw
-from fields.fieldbase import FieldBase
+from fields._base import FieldBase
 
 
 class BulkOptions(FieldBase):
@@ -16,9 +16,6 @@ class BulkOptions(FieldBase):
             "options": self.options,
             "labels":  self.labels
         }
-
-    def get_label(self):
-        return self.label
 
     def get_height(self, config):
         if self.prev_line:
@@ -52,6 +49,3 @@ class BulkOptions(FieldBase):
             x_offset += config["box_spacing"] + config["box_size"]
 
         return self.get_height(config)
-
-    def get_type(self):
-        return self.__class__.__name__

@@ -1,7 +1,7 @@
 from reportlab.lib.colors import black
 
 import draw_functions as draw
-from fields.fieldbase import FieldBase
+from fields._base import FieldBase
 
 
 class Barcode(FieldBase):
@@ -17,12 +17,6 @@ class Barcode(FieldBase):
             "label":  self.label,
             "digits": self.digits
         }
-
-    def get_label(self):
-        return self.label
-
-    def get_type(self):
-        return self.__class__.__name__
 
     def get_height(self, config):
         return config["box_size"]

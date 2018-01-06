@@ -11,14 +11,3 @@ class Numbers(HorizontalOptions):
                 options.append("+10")
 
         HorizontalOptions.__init__(self, label, options, **kwargs)
-
-    def get_info(self):
-        d = HorizontalOptions.get_info(self)
-        d["type"] = self.get_type()
-        return d
-
-    def draw(self, canvas, x_pos, y_pos, config, *args):
-        return HorizontalOptions.draw(self, canvas, x_pos, y_pos, config)
-
-    def get_type(self):
-        return self.__class__.__name__

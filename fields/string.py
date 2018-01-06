@@ -1,4 +1,6 @@
-from fields.fieldbase import FieldBase
+from reportlab.pdfbase.pdfmetrics import stringWidth
+
+from fields._base import FieldBase
 import draw_functions as draw
 
 
@@ -10,6 +12,9 @@ class String(FieldBase):
         self.pos = pos
         self.height = height
         self.x_offset = x_offset
+
+    def _iter(self, img, x_pos, y_pos, config, func, *args, **kwargs):
+        pass
 
     def draw(self, canvas, x_pos, y_pos, config):
         if not self.pos == (0, 0):
@@ -23,7 +28,11 @@ class String(FieldBase):
         if font_size == -1:
             font_size = config["font_size"]
         draw.string(canvas, x_pos, y_pos, self.string, font_size)
+        print(self.get_width(config))
         return self.get_height(config)
+
+    def get_width(self, config):
+        return stringWidth(self.string, 'OpenSansEmoji', self.font_size)
 
     def get_height(self, config):
         if not self.pos == (0, 0):
@@ -33,9 +42,3 @@ class String(FieldBase):
                 return self.font_size + config["y_spacing"] / 8
             else:
                 return self.font_size + config["y_spacing"]
-
-    def get_type(self):
-        return self.__class__.__name__
-
-    def get_label(self):
-        return None

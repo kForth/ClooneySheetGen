@@ -1,4 +1,4 @@
-from fields.fieldbase import FieldBase
+from fields._base import FieldBase
 
 import draw_functions as draw
 
@@ -28,9 +28,3 @@ class Divider(FieldBase):
                            self.SHEET_WIDTH - (config["marker_size"] * 2) - 0.25, config["divider_height"],
                            stroke=False, fill=True)
         return self.get_height(config)
-
-    def get_type(self):
-        return self.__class__.__name__
-
-    def get_label(self):
-        return self.label

@@ -39,7 +39,7 @@ class Sheet:
                 f.close()
 
         y_pos = self.config["marker_size"] + 1.125
-        Markers().draw(self.canvas, self.config)
+        Markers().draw(self.canvas, 0, 0, self.config)
         header = Header(match, pos)
         header_height, scan_info = header.draw(self.canvas, self.config["x_pos"] + self.config["marker_size"], y_pos,
                                                self.config)
@@ -53,9 +53,8 @@ class Sheet:
 
         for f_num in range(len(self.fields)):
             x_pos = self.config["x_pos"]
-
             f = self.fields[f_num]
-            f_width = ceil(f.calc_width(self.config) / seg_width)
+            f_width = ceil(f.get_width(self.config) / seg_width)
             if f.prev_line and f_width <= 4 - line_width:
                 if line_width == 0:
                     y_pos += prev_y

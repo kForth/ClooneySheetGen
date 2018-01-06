@@ -1,5 +1,5 @@
 import draw_functions as draw
-from fields.fieldbase import FieldBase
+from fields._base import FieldBase
 
 
 class Image(FieldBase):
@@ -23,11 +23,8 @@ class Image(FieldBase):
             "prev_line": self.prev_line
         }
 
-    def get_label(self):
-        return self.label
-
-    def get_type(self):
-        return self.__class__.__name__
+    def get_width(self, _):
+        return self.width
 
     def get_height(self, config):
         if self.prev_line:
