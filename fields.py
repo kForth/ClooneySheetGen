@@ -68,7 +68,7 @@ class Field(object):
 
 class Header(Field):
     def __init__(self, match, pos):
-        Field.__init__(self)
+        super().__init__()
         self.match = match
         self.pos = pos
 
@@ -133,7 +133,7 @@ class Header(Field):
 
 class BoxNumber(Field):
     def __init__(self, label, digits=4):
-        Field.__init__(self)
+        super().__init__()
         self.label = label
         self.digits = digits
 
@@ -164,7 +164,7 @@ class BoxNumber(Field):
 
 class Barcode(Field):
     def __init__(self, label, data, digits=4):
-        Field.__init__(self)
+        super().__init__()
         self.label = label
         self.data = data
         self.digits = digits
@@ -210,7 +210,7 @@ class Barcode(Field):
 
 class HorizontalOptions(Field):
     def __init__(self, label, options: list, prev_line=False, offset=0, note_space=False, note_width=3):
-        Field.__init__(self)
+        super().__init__()
         self.label = label
         self.options = options
         self.prev_line = prev_line
@@ -281,7 +281,7 @@ class HorizontalOptions(Field):
 
 class BulkOptions(Field):
     def __init__(self, label, options, labels, prev_line=False):
-        Field.__init__(self)
+        super().__init__()
         self.label = label
         self.options = options
         self.labels = labels
@@ -347,7 +347,6 @@ class Numbers(HorizontalOptions):
 
     def get_info(self):
         d = HorizontalOptions.get_info(self)
-        d = HorizontalOptions.get_info(self)
         d["type"] = self.get_type()
         return d
 
@@ -360,7 +359,7 @@ class Numbers(HorizontalOptions):
 
 class Image(Field):
     def __init__(self, label, width, height, image_path, prev_line=False, offset=4.25, y_offset=1):
-        Field.__init__(self)
+        super().__init__()
         self.label = label
         self.width = width
         self.height = height
@@ -426,7 +425,7 @@ class Boolean(HorizontalOptions):
 
 class Divider(Field):
     def __init__(self, label=None):
-        Field.__init__(self)
+        super().__init__()
         self.label = label
 
     def get_height(self, config):
@@ -459,7 +458,7 @@ class Divider(Field):
 
 class Markers(Field):
     def draw(self, canvas, config):
-        Field.__init__(self)
+        super().__init__()
         marker_color = Color(*config["marker_colour"], alpha=1.0)
         draw.box(canvas,
                  0,
@@ -490,7 +489,7 @@ class Markers(Field):
 
 class SevenSegment(Field):
     def __init__(self, value=11):
-        Field.__init__(self)
+        super().__init__()
         if value == " ":
             value = 11
         self.value = value
@@ -549,7 +548,7 @@ class SevenSegment(Field):
 
 class Digits(Field):
     def __init__(self, label, digits=4, values="11 11 11 11"):
-        Field.__init__(self)
+        super().__init__()
         self.digits = digits
         self.label = label
         self.values = values
@@ -597,8 +596,8 @@ class Digits(Field):
 
 
 class String(Field):
-    def __init__(self, string, font_size=-1, pos=(0, 0), height="normal", x_offset=0):
-        Field.__init__(self)
+    def __init__(self, string, font_size=-1.0, pos=(0, 0), height="normal", x_offset=0):
+        super().__init__()
         self.string = string
         self.font_size = font_size
         self.pos = pos
