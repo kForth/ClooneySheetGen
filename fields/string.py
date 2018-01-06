@@ -28,7 +28,6 @@ class String(FieldBase):
         if font_size == -1:
             font_size = config["font_size"]
         draw.string(canvas, x_pos, y_pos, self.string, font_size)
-        print(self.get_width(config))
         return self.get_height(config)
 
     def get_width(self, config):
