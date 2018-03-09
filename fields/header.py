@@ -20,14 +20,12 @@ class Header(FieldBase):
         self.pos = pos
 
     def draw(self, canvas, x_pos, y_pos, config):
-        String("Celt-X Team 5406", font_size=0.5).draw(canvas, 0.05 + config["marker_size"],
+        String("Celt-X Team 5406", font_size=0.25).draw(canvas, 0.05 + config["marker_size"],
                                                        0.05 + config["marker_size"], config)
-        String("Clooney Scouting System", font_size=3.0 / 32).draw(canvas, 3 + config["marker_size"],
-                                                                   0.5 + config["marker_size"], config)
         String(config["event"], font_size=3.0 / 32).draw(canvas, 0.125 + config["marker_size"],
-                                                         0.5 + config["marker_size"], config)
+                                                         0.3 + config["marker_size"], config)
         String("Match " + str(self.match) + "    " + self.POSITIONS[self.pos] + "    Scout: _______", font_size=0.25) \
-            .draw(canvas, 0.125 + config["marker_size"], 0.625 + config["marker_size"], config)
+            .draw(canvas, 0.125 + config["marker_size"], 7.0/16 + config["marker_size"], config)
 
         match_pos_string = str(self.match)
         while len(match_pos_string) < 3:
@@ -43,7 +41,7 @@ class Header(FieldBase):
         team_num = BoxNumber("Team Number")
         team_num.set_id("team_number")
         team_num_x = config["x_pos"] + config["marker_size"]
-        team_num_y = 1.25
+        team_num_y = 1
         team_num.draw(canvas, team_num_x, team_num_y, config)
 
         box_bardcode_info = [

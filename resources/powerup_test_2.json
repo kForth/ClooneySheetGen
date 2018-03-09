@@ -1,0 +1,284 @@
+[
+  {
+    "type":    "Image",
+    "options": {
+      "label":      "Draw the Robot",
+      "width":      2.5,
+      "height":     1.75,
+      "image_path": null,
+      "prev_line":  true,
+      "offset":     3.75,
+      "y_offset":   1.5
+    },
+    "id": "robot_drawing"
+  },
+  {
+    "type":    "Divider",
+    "options": {
+      "label": "Autonomous"
+    }
+  },
+  {
+    "type":    "Boolean",
+    "options": {
+      "label":     "Didn't Move"
+    },
+    "id": "auto_no_move"
+  },
+  {
+    "type":    "Boolean",
+    "options": {
+      "label":     "Wrong Switch",
+      "prev_line": true
+    },
+    "id": "auto_wrong_switch"
+  },
+  {
+    "type":    "Boolean",
+    "options": {
+      "label":     "Wrong Scale",
+      "prev_line": true
+    },
+    "id": "auto_wrong_scale"
+  },
+  {
+    "type":    "Numbers",
+    "options": {
+      "label": "Placed in Exchange",
+      "ones":  6
+    },
+    "id": "auto_scored_exchange"
+  },
+  {
+    "type":    "Numbers",
+    "options": {
+      "label": "Exchange Attempts",
+      "ones":  6,
+      "prev_line": true
+    },
+    "id": "auto_attempted_exchange"
+  },
+  {
+    "type":    "Numbers",
+    "options": {
+      "label": "Scored Switch",
+      "ones":  6
+    },
+    "id": "auto_scored_switch"
+  },
+  {
+    "type":    "Numbers",
+    "options": {
+      "label": "Switch Attempts",
+      "ones":  6,
+      "prev_line": true
+    },
+    "id": "auto_attempted_switch"
+  },
+  {
+    "type":    "Numbers",
+    "options": {
+      "label": "Scored Scale",
+      "ones":  6
+    },
+    "id": "auto_scored_scale"
+  },
+  {
+    "type":    "Numbers",
+    "options": {
+      "label": "Scale Attempts",
+      "ones":  6,
+      "prev_line": true
+    },
+    "id": "auto_attempted_scale"
+  },
+  {
+    "type":    "Divider",
+    "options": {
+      "label": "Tele-Op"
+    }
+  },
+  {
+    "type":    "Numbers",
+    "options": {
+      "label":      "Placed in Exchange",
+      "tens":       2,
+      "note_space": true
+    },
+    "id": "tele_scored_own_switch"
+  },
+  {
+    "type":    "Numbers",
+    "options": {
+      "label":      "Scored Own Switch",
+      "tens":       2,
+      "note_space": true
+    },
+    "id": "tele_scored_own_switch"
+  },
+  {
+    "type":    "Numbers",
+    "options": {
+      "label":      "Scored Opp Switch",
+      "tens":       2,
+      "note_space": true
+    },
+    "id": "tele_scored_opp_switch"
+  },
+  {
+    "type":    "Numbers",
+    "options": {
+      "label":      "Scored on Scale",
+      "tens":       2,
+      "note_space": true
+    },
+    "id": "tele_scored_scale"
+  },
+  {
+    "type":    "Numbers",
+    "options": {
+      "label":      "Knocked Off Scale",
+      "tens":       2,
+      "note_space": true
+    },
+    "id": "tele_descored_scale"
+  },
+  {
+    "type":    "Numbers",
+    "options": {
+      "label":      "Cubes Dropped",
+      "tens":       2,
+      "note_space": true
+    },
+    "id": "tele_dropped_cubes"
+  },
+  {
+    "type":    "Divider",
+    "options": {
+      "label": "Climbing"
+    }
+  },
+  {
+    "type":    "Numbers",
+    "options": {
+      "label": "Deployed Ramps",
+      "ones": 2
+    },
+    "id": "tele_deployed_ramps"
+  },
+  {
+    "type":    "Numbers",
+    "options": {
+      "label": "Ramps Used",
+      "ones":  2,
+      "prev_line": true
+    },
+    "id": "tele_ramps_used"
+  },
+  {
+    "type":    "HorizontalOptions",
+    "options": {
+      "label":   "Lifted Self",
+      "options": [
+        "S",
+        "F"
+      ]
+    },
+    "id": "tele_climbed_self",
+    "default": "NA"
+  },
+  {
+    "type":    "Numbers",
+    "options": {
+      "label": "Partners Lifted",
+      "ones":  2,
+      "prev_line": true
+    },
+    "id": "tele_partners_lifted"
+  },
+  {
+    "type":    "Numbers",
+    "options": {
+      "label": "Attempted Partners",
+      "ones":  2,
+      "prev_line": true
+    },
+    "id": "tele_partners_attempted"
+  },
+  {
+    "type":    "Boolean",
+    "options": {
+      "label": "Climbed Ramp"
+    },
+    "id": "tele_climbed_ramp"
+  },
+  {
+    "type":    "Boolean",
+    "options": {
+      "label": "Lifted By Partner",
+      "prev_line": true
+    },
+    "id": "tele_lifted_by_partner"
+  },
+  {
+    "type":    "Boolean",
+    "options": {
+      "label": "Stayed on Ground",
+      "prev_line": true
+    },
+    "id": "tele_no_climb"
+  },
+  {
+    "type":    "Divider",
+    "options": {
+      "label": "Overall Performance"
+    }
+  },
+  {
+    "type":    "Boolean",
+    "options": {
+      "label": "Stopped Moving"
+    },
+    "id": "disabled"
+  },
+  {
+    "type":    "Boolean",
+    "options": {
+      "label":     "Never Moved",
+      "prev_line": true
+    },
+    "id": "no_move"
+  },
+  {
+    "type":    "Boolean",
+    "options": {
+      "label":     "No Show",
+      "prev_line": true
+    },
+    "id": "no_show"
+  },
+  {
+    "type":    "HorizontalOptions",
+    "options": {
+      "label":     "Defense",
+      "options":   [
+        "💩",
+        "👎",
+        "👍",
+        "🔥"
+      ]
+    },
+    "id": "tele_defense",
+    "default": ""
+  },
+  {
+    "type":    "Image",
+    "options": {
+      "label":      "Notes",
+      "width":      5.625,
+      "height":     0.75,
+      "image_path": null
+    },
+    "id": "notes"
+  }
+]

@@ -1,0 +1,239 @@
+[
+  {
+    "type":    "Image",
+    "options": {
+      "label":      "Draw the Robot",
+      "width":      2.5,
+      "height":     1.75,
+      "image_path": null,
+      "prev_line":  true,
+      "offset":     3.75,
+      "y_offset":   1.5
+    },
+    "id": "robot_drawing"
+  },
+  {
+    "type":    "Divider",
+    "options": {
+      "label": "Autonomous"
+    }
+  },
+  {
+    "type":    "BulkHorizontal",
+    "options": {
+      "label":   "                         Time (s)",
+      "options": [".", "1-3", "3-5", "5-7", "7-10", "10-15"],
+      "labels": ["", "", "", ""]
+    },
+    "id": "auto_attempt_time"
+  },
+  {
+    "type":    "BulkHorizontal",
+    "options": {
+      "label":   "  Scoring Location",
+      "options": [",", "Ex", "Sw", "Sc"],
+      "labels": ["", "", "", ""],
+      "prev_line": true,
+      "offset": -2
+    },
+    "id": "auto_score_location"
+  },
+  {
+    "type":    "BulkHorizontal",
+    "options": {
+      "label":   "Missed",
+      "options": [",", "_"],
+      "labels": ["", "", "", ""],
+      "prev_line": true,
+      "offset": -4.75
+    },
+    "id": "auto_score_miss"
+  },
+  {
+    "type":    "Boolean",
+    "options": {
+      "label":     "Didn't Move",
+      "prev_line": true,
+      "offset": -5.5
+    },
+    "id": "auto_no_move"
+  },
+
+  {
+    "type":    "Divider",
+    "options": {
+      "label": "Power Cube Scoring"
+    }
+  },
+
+
+  {
+    "type":    "BulkHorizontal",
+    "options": {
+      "label":   "            Pickup to Score Time (s)",
+      "options": [".", "<5", "5-10", "10-15", "15-30", ">30"],
+      "labels": ["", "", "", "", "", "", "", "", "", ""]
+    },
+    "id": "tele_cycles_time"
+  },
+  {
+    "type":    "BulkHorizontal",
+    "options": {
+      "label":   "    Scoring Location",
+      "options": ["Ex", "Sw", "Sc", "Op"],
+      "labels": ["", "", "", "", "", "", "", "", "", ""],
+      "prev_line": true,
+      "offset": -1.875
+    },
+    "id": "tele_cycles_location"
+  },
+  {
+    "type":    "BulkHorizontal",
+    "options": {
+      "label":   "Faced Defense",
+      "options": [".", "_"],
+      "labels": ["", "", "", "", "", "", "", "", "", ""],
+      "prev_line": true,
+      "offset": -4.625
+    },
+    "id": "tele_cycles_defense"
+  },
+  {
+    "type":    "BulkHorizontal",
+    "options": {
+      "label":   "Played Defense",
+      "options": [".", "_"],
+      "labels": ["", "", "", "", "", "", "", "", "", ""],
+      "prev_line": true,
+      "offset": -5.625
+    },
+    "id": "tele_cycles_defense"
+  },
+  {
+    "type":    "BulkHorizontal",
+    "options": {
+      "label":   "  Descored Cubes",
+      "options": ["1", "2", "3", "4+"],
+      "labels": ["", "", "", "", "", "", "", "", "", ""],
+      "prev_line": true,
+      "offset": -6.625
+    },
+    "id": "tele_cycles_descore"
+  },
+  {
+    "type":    "Divider",
+    "options": {
+    }
+  },
+
+
+  {
+    "type":    "Divider",
+    "options": {
+      "label": "Climbing"
+    }
+  },
+  {
+    "type":    "Numbers",
+    "options": {
+      "label": "Deployed Ramps",
+      "ones": 2
+    },
+    "id": "tele_deployed_ramps"
+  },
+  {
+    "type":    "Numbers",
+    "options": {
+      "label": "Ramps Used",
+      "ones":  2,
+      "prev_line": true
+    },
+    "id": "tele_ramps_used"
+  },
+  {
+    "type":    "Numbers",
+    "options": {
+      "label": "Robots Lifted",
+      "ones":  3,
+      "prev_line": true
+    },
+    "id": "tele_robots_lifted"
+  },
+  {
+    "type":    "Boolean",
+    "options": {
+      "label": "Lifted Self"
+    },
+    "id": "tele_climbed_ramp"
+  },
+  {
+    "type":    "Boolean",
+    "options": {
+      "label": "Lifted By Partner",
+      "prev_line": true
+    },
+    "id": "tele_lifted_by_partner"
+  },
+  {
+    "type":    "Boolean",
+    "options": {
+      "label": "Stayed on Ground",
+      "prev_line": true
+    },
+    "id": "tele_no_climb"
+  },
+  {
+    "type":    "Boolean",
+    "options": {
+      "label": "Failed Lifting"
+    },
+    "id": "tele_failed_climb"
+  },
+  {
+    "type":    "Boolean",
+    "options": {
+      "label": "Fell Off Ramp",
+      "prev_line": true
+    },
+    "id": "tele_fell_off_ramp"
+  },
+  {
+    "type":    "Divider",
+    "options": {
+      "label": "Overall Performance"
+    }
+  },
+  {
+    "type":    "Boolean",
+    "options": {
+      "label": "Stopped Moving"
+    },
+    "id": "disabled"
+  },
+  {
+    "type":    "Boolean",
+    "options": {
+      "label":     "Never Moved",
+      "prev_line": true
+    },
+    "id": "no_move"
+  },
+  {
+    "type":    "Boolean",
+    "options": {
+      "label":     "No Show",
+      "prev_line": true
+    },
+    "id": "no_show"
+  },
+  {
+    "type":    "Image",
+    "options": {
+      "label":      "Notes",
+      "width":      5.625,
+      "height":     0.375,
+      "image_path": null
+    },
+    "id": "notes"
+  }
+]

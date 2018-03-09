@@ -55,7 +55,7 @@ class Sheet:
             x_pos = self.config["x_pos"]
             f = self.fields[f_num]
             f_width = ceil(f.get_width(self.config) / seg_width)
-            if f.prev_line and f_width <= 4 - line_width:
+            if f.prev_line:# and f_width <= 4 - line_width:
                 if line_width == 0:
                     y_pos += prev_y
                 x_pos += (self.config["box_size"] + self.config["box_spacing"]) * self.config[
@@ -64,10 +64,10 @@ class Sheet:
             else:
                 y_pos += prev_y
                 line_width = f_width
-            if line_width > 4:
-                line_width = 0
 
-            prev_y = f.draw(self.canvas, x_pos + self.config["marker_size"], y_pos, self.config)
+            field_height = f.draw(self.canvas, x_pos + self.config["marker_size"], y_pos, self.config)
+            if not f.prev_line or field_height > prev_y:
+                prev_y = field_height
 
             if self.first_sheet:
                 data = {
