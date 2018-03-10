@@ -10,7 +10,7 @@ from fields import *
 
 pdfmetrics.registerFont(TTFont("OpenSansEmoji", "resources/OpenSansEmoji.ttf"))
 
-field_types = [Barcode, Boolean, BoxNumber, BulkOptions, Digits, Divider, Header, HorizontalOptions, Image, Markers,
+field_types = [Barcode, Boolean, BoxNumber, BulkOptions, BulkHorizontal, Digits, Divider, Header, HorizontalOptions, Image, Markers,
                Numbers, SevenSegment, String]
 valid_fields = map(lambda x: x.__name__, field_types)
 

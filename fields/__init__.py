@@ -1,6 +1,7 @@
 from fields.barcode import Barcode
 from fields.boolean import Boolean
 from fields.box_number import BoxNumber
+from fields.bulk_horizontal import BulkHorizontal
 from fields.bulk_options import BulkOptions
 from fields.digits import Digits
 from fields.divider import Divider
