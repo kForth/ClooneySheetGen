@@ -1,9 +1,9 @@
 {
     "init_sheet_num":          1,
-    "num_sheets":              1,
+    "num_sheets":              80,
     "filename":                "PowerUp",
     "encode_scanner":          true,
-    "event":                   "Test Sheet",
+    "event":                   "Ryerson 2018",
     "spacer_page":             true,
     "x_pos":                   0.25,
     "y_spacing":               0.2,

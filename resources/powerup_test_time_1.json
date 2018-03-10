@@ -1,0 +1,522 @@
+[
+  {
+    "type":    "Image",
+    "options": {
+      "label":      "Draw the Robot",
+      "width":      2.5,
+      "height":     1.75,
+      "image_path": null,
+      "prev_line":  true,
+      "offset":     3.75,
+      "y_offset":   1.5
+    },
+    "id": "robot_drawing"
+  },
+  {
+    "type":    "Divider",
+    "options": {
+      "label": "Autonomous"
+    }
+  },
+  {
+    "type":    "Boolean",
+    "options": {
+      "label":     "Didn't Move"
+    },
+    "id": "auto_no_move"
+  },
+  {
+    "type":    "Boolean",
+    "options": {
+      "label":     "Wrong Switch",
+      "prev_line": true
+    },
+    "id": "auto_wrong_switch"
+  },
+  {
+    "type":    "Boolean",
+    "options": {
+      "label":     "Wrong Scale",
+      "prev_line": true
+    },
+    "id": "auto_wrong_scale"
+  },
+  {
+    "type":    "Numbers",
+    "options": {
+      "label": "Placed in Exchange",
+      "ones":  6
+    },
+    "id": "auto_scored_switch"
+  },
+  {
+    "type":    "HorizontalOptions",
+    "options": {
+      "label": "Scored Switch at (s)",
+      "options": ["1-2", "2-3", "4-5", "6-7", "8-9", ">10"]
+    },
+    "id": "auto_first_switch"
+  },
+  {
+    "type":    "Numbers",
+    "options": {
+      "label": "Scored Switch",
+      "ones":  6,
+      "prev_line": true
+    },
+    "id": "auto_scored_switch"
+  },
+  {
+    "type":    "HorizontalOptions",
+    "options": {
+      "label": "Scored Scale at (s)",
+      "options": ["1-2", "2-3", "4-5", "6-7", "8-9", ">10"]
+    },
+    "id": "auto_first_scale"
+  },
+  {
+    "type":    "Numbers",
+    "options": {
+      "label": "Scored Scale",
+      "ones":  6,
+      "prev_line": true
+    },
+    "id": "auto_scored_scale"
+  },
+  {
+    "type":    "Divider",
+    "options": {
+      "label": "Scoring Cycles"
+    }
+  },
+
+
+  {
+    "type":    "HorizontalOptions",
+    "options": {
+      "label":   "Cylce Time (s)",
+      "options": ["<5", "5-10", "10-15", "15-30", "30+"]
+    },
+    "id": "tele_cycle_time_1"
+  },
+  {
+    "type": "HorizontalOptions",
+    "options": {
+      "label": "Location Scored",
+      "options": ["Ex", "Sw", "Sc", "Op"],
+      "offset": -1.02,
+      "prev_line": true
+    },
+    "id": "tele_cycle_loc_1"
+  },
+  {
+    "type": "Boolean",
+    "options": {
+      "label": "Faced Defense",
+      "offset": -2.375,
+      "prev_line": true
+    },
+    "id": "tele_cycle_faced_defense_1"
+  },
+
+
+  {
+    "type":    "HorizontalOptions",
+    "options": {
+      "label":   "Cylce Time (s)",
+      "options": ["<5", "5-10", "10-15", "15-30", "30+"]
+    },
+    "id": "tele_cycle_time_2"
+  },
+  {
+    "type": "HorizontalOptions",
+    "options": {
+      "label": "Location Scored",
+      "options": ["Ex", "Sw", "Sc", "Op"],
+      "offset": -1.02,
+      "prev_line": true
+    },
+    "id": "tele_cycle_loc_2"
+  },
+  {
+    "type": "Boolean",
+    "options": {
+      "label": "Faced Defense",
+      "offset": -2.375,
+      "prev_line": true
+    },
+    "id": "tele_cycle_faced_defense_2"
+  },
+
+
+  {
+    "type":    "HorizontalOptions",
+    "options": {
+      "label":   "Cylce Time (s)",
+      "options": ["<5", "5-10", "10-15", "15-30", "30+"]
+    },
+    "id": "tele_cycle_time_3"
+  },
+  {
+    "type": "HorizontalOptions",
+    "options": {
+      "label": "Location Scored",
+      "options": ["Ex", "Sw", "Sc", "Op"],
+      "offset": -1.02,
+      "prev_line": true
+    },
+    "id": "tele_cycle_loc_3"
+  },
+  {
+    "type": "Boolean",
+    "options": {
+      "label": "Faced Defense",
+      "offset": -2.375,
+      "prev_line": true
+    },
+    "id": "tele_cycle_faced_defense_3"
+  },
+
+
+  {
+    "type":    "HorizontalOptions",
+    "options": {
+      "label":   "Cylce Time (s)",
+      "options": ["<5", "5-10", "10-15", "15-30", "30+"]
+    },
+    "id": "tele_cycle_time_4"
+  },
+  {
+    "type": "HorizontalOptions",
+    "options": {
+      "label": "Location Scored",
+      "options": ["Ex", "Sw", "Sc", "Op"],
+      "offset": -1.02,
+      "prev_line": true
+    },
+    "id": "tele_cycle_loc_4"
+  },
+  {
+    "type": "Boolean",
+    "options": {
+      "label": "Faced Defense",
+      "offset": -2.375,
+      "prev_line": true
+    },
+    "id": "tele_cycle_faced_defense_4"
+  },
+
+
+  {
+    "type":    "HorizontalOptions",
+    "options": {
+      "label":   "Cylce Time (s)",
+      "options": ["<5", "5-10", "10-15", "15-30", "30+"]
+    },
+    "id": "tele_cycle_time_5"
+  },
+  {
+    "type": "HorizontalOptions",
+    "options": {
+      "label": "Location Scored",
+      "options": ["Ex", "Sw", "Sc", "Op"],
+      "offset": -1.02,
+      "prev_line": true
+    },
+    "id": "tele_cycle_loc_5"
+  },
+  {
+    "type": "Boolean",
+    "options": {
+      "label": "Faced Defense",
+      "offset": -2.375,
+      "prev_line": true
+    },
+    "id": "tele_cycle_faced_defense_5"
+  },
+
+
+  {
+    "type":    "HorizontalOptions",
+    "options": {
+      "label":   "Cylce Time (s)",
+      "options": ["<5", "5-10", "10-15", "15-30", "30+"]
+    },
+    "id": "tele_cycle_time_6"
+  },
+  {
+    "type": "HorizontalOptions",
+    "options": {
+      "label": "Location Scored",
+      "options": ["Ex", "Sw", "Sc", "Op"],
+      "offset": -1.02,
+      "prev_line": true
+    },
+    "id": "tele_cycle_loc_6"
+  },
+  {
+    "type": "Boolean",
+    "options": {
+      "label": "Faced Defense",
+      "offset": -2.375,
+      "prev_line": true
+    },
+    "id": "tele_cycle_faced_defense_6"
+  },
+
+
+  {
+    "type":    "HorizontalOptions",
+    "options": {
+      "label":   "Cylce Time (s)",
+      "options": ["<5", "5-10", "10-15", "15-30", "30+"]
+    },
+    "id": "tele_cycle_time_7"
+  },
+  {
+    "type": "HorizontalOptions",
+    "options": {
+      "label": "Location Scored",
+      "options": ["Ex", "Sw", "Sc", "Op"],
+      "offset": -1.02,
+      "prev_line": true
+    },
+    "id": "tele_cycle_loc_7"
+  },
+  {
+    "type": "Boolean",
+    "options": {
+      "label": "Faced Defense",
+      "offset": -2.375,
+      "prev_line": true
+    },
+    "id": "tele_cycle_faced_defense_7"
+  },
+
+
+  {
+    "type":    "HorizontalOptions",
+    "options": {
+      "label":   "Cylce Time (s)",
+      "options": ["<5", "5-10", "10-15", "15-30", "30+"]
+    },
+    "id": "tele_cycle_time_8"
+  },
+  {
+    "type": "HorizontalOptions",
+    "options": {
+      "label": "Location Scored",
+      "options": ["Ex", "Sw", "Sc", "Op"],
+      "offset": -1.02,
+      "prev_line": true
+    },
+    "id": "tele_cycle_loc_8"
+  },
+  {
+    "type": "Boolean",
+    "options": {
+      "label": "Faced Defense",
+      "offset": -2.375,
+      "prev_line": true
+    },
+    "id": "tele_cycle_faced_defense_8"
+  },
+
+
+  {
+    "type":    "HorizontalOptions",
+    "options": {
+      "label":   "Cylce Time (s)",
+      "options": ["<5", "5-10", "10-15", "15-30", "30+"]
+    },
+    "id": "tele_cycle_time_9"
+  },
+  {
+    "type": "HorizontalOptions",
+    "options": {
+      "label": "Location Scored",
+      "options": ["Ex", "Sw", "Sc", "Op"],
+      "offset": -1.02,
+      "prev_line": true
+    },
+    "id": "tele_cycle_loc_9"
+  },
+  {
+    "type": "Boolean",
+    "options": {
+      "label": "Faced Defense",
+      "offset": -2.375,
+      "prev_line": true
+    },
+    "id": "tele_cycle_faced_defense_9"
+  },
+
+
+  {
+    "type":    "HorizontalOptions",
+    "options": {
+      "label":   "Cylce Time (s)",
+      "options": ["<5", "5-10", "10-15", "15-30", "30+"]
+    },
+    "id": "tele_cycle_time_10"
+  },
+  {
+    "type": "HorizontalOptions",
+    "options": {
+      "label": "Location Scored",
+      "options": ["Ex", "Sw", "Sc", "Op"],
+      "offset": -1.02,
+      "prev_line": true
+    },
+    "id": "tele_cycle_loc_10"
+  },
+  {
+    "type": "Boolean",
+    "options": {
+      "label": "Faced Defense",
+      "offset": -2.375,
+      "prev_line": true
+    },
+    "id": "tele_cycle_faced_defense_10"
+  },
+
+
+  {
+    "type":    "Divider",
+    "options": {
+      "label": "Climbing"
+    }
+  },
+  {
+    "type":    "Numbers",
+    "options": {
+      "label": "Deployed Ramps",
+      "ones": 2
+    },
+    "id": "tele_deployed_ramps"
+  },
+  {
+    "type":    "Numbers",
+    "options": {
+      "label": "Ramps Used",
+      "ones":  2,
+      "prev_line": true
+    },
+    "id": "tele_ramps_used"
+  },
+  {
+    "type":    "HorizontalOptions",
+    "options": {
+      "label":   "Lifted Self",
+      "options": [
+        ["S", 1],
+        ["F", 0]
+      ]
+    },
+    "id": "tele_climbed_self",
+    "default": "NA"
+  },
+  {
+    "type":    "Numbers",
+    "options": {
+      "label": "Partners Lifted",
+      "ones":  2,
+      "prev_line": true
+    },
+    "id": "tele_partners_lifted"
+  },
+  {
+    "type":    "Numbers",
+    "options": {
+      "label": "Attempted Partners",
+      "ones":  2,
+      "prev_line": true
+    },
+    "id": "tele_partners_attempted"
+  },
+  {
+    "type":    "Boolean",
+    "options": {
+      "label": "Climbed Ramp"
+    },
+    "id": "tele_climbed_ramp"
+  },
+  {
+    "type":    "Boolean",
+    "options": {
+      "label": "Lifted By Partner",
+      "prev_line": true
+    },
+    "id": "tele_lifted_by_partner"
+  },
+  {
+    "type":    "Boolean",
+    "options": {
+      "label": "Stayed on Ground",
+      "prev_line": true
+    },
+    "id": "tele_no_climb"
+  },
+  {
+    "type":    "Divider",
+    "options": {
+      "label": "Overall Performance"
+    }
+  },
+  {
+    "type":    "Numbers",
+    "options": {
+      "label":      "Knocked Off Scale",
+      "tens":       1,
+      "note_space": true
+    },
+    "id": "tele_descored_scale"
+  },
+  {
+    "type":    "Boolean",
+    "options": {
+      "label": "Stopped Moving"
+    },
+    "id": "disabled"
+  },
+  {
+    "type":    "Boolean",
+    "options": {
+      "label":     "Never Moved",
+      "prev_line": true
+    },
+    "id": "no_move"
+  },
+  {
+    "type":    "Boolean",
+    "options": {
+      "label":     "No Show",
+      "prev_line": true
+    },
+    "id": "no_show"
+  },
+  {
+    "type":    "HorizontalOptions",
+    "options": {
+      "label":     "Defense",
+      "options":   [
+        ["💩", 0],
+        ["👎", 1],
+        ["👍", 2],
+        ["🔥", 3]
+      ]
+    },
+    "id": "tele_defense",
+    "default": ""
+  },
+  {
+    "type":    "Image",
+    "options": {
+      "label":      "Notes",
+      "width":      5.625,
+      "height":     0.75,
+      "image_path": null
+    },
+    "id": "notes"
+  }
+]

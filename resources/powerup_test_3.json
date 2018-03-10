@@ -1,0 +1,248 @@
+[
+  {
+    "type":    "Image",
+    "options": {
+      "label":      "Draw the Robot",
+      "width":      2.5,
+      "height":     1.75,
+      "image_path": null,
+      "prev_line":  true,
+      "offset":     3.78,
+      "y_offset":   1.5
+    },
+    "id": "robot_drawing"
+  },
+  {
+    "type":    "Divider",
+    "options": {
+      "label": "Autonomous"
+    }
+  },
+  {
+    "type":    "Boolean",
+    "options": {
+      "label":     "Didn't Move"
+    },
+    "id": "auto_no_move"
+  },
+  {
+    "type":    "Boolean",
+    "options": {
+      "label":     "Wrong Switch/Scale",
+      "prev_line": true,
+      "offset": -0.335
+    },
+    "id": "auto_wrong_switch"
+  },
+  {
+    "type":    "Numbers",
+    "options": {
+      "label": "Placed in Exchange",
+      "ones":  6,
+      "prev_line": true,
+      "offset": -0.335
+    },
+    "id": "auto_scored_exchange"
+  },
+  {
+    "type":    "Numbers",
+    "options": {
+      "label": "Scored Switch",
+      "ones":  6
+    },
+    "id": "auto_scored_switch"
+  },
+  {
+    "type":    "Numbers",
+    "options": {
+      "label": "Scored Scale",
+      "ones":  6,
+      "prev_line": true,
+      "offset": -0.335
+    },
+    "id": "auto_scored_scale"
+  },
+  {
+    "type":    "Divider",
+    "options": {
+      "label": "Tele-Op"
+    }
+  },
+  {
+    "type":    "Numbers",
+    "options": {
+      "label":      "Placed in Exchange",
+      "tens":       2,
+      "note_space": true
+    },
+    "id": "tele_scored_own_switch"
+  },
+  {
+    "type":    "Numbers",
+    "options": {
+      "label":      "Scored Own Switch",
+      "tens":       2,
+      "note_space": true
+    },
+    "id": "tele_scored_own_switch"
+  },
+  {
+    "type":    "Numbers",
+    "options": {
+      "label":      "Scored Opp Switch",
+      "tens":       2,
+      "note_space": true
+    },
+    "id": "tele_scored_opp_switch"
+  },
+  {
+    "type":    "Numbers",
+    "options": {
+      "label":      "Scored on Scale",
+      "tens":       2,
+      "note_space": true
+    },
+    "id": "tele_scored_scale"
+  },
+  {
+    "type":    "Numbers",
+    "options": {
+      "label":      "Knocked Off Scale",
+      "tens":       2,
+      "note_space": true
+    },
+    "id": "tele_descored_scale"
+  },
+  {
+    "type":    "Numbers",
+    "options": {
+      "label":      "Cubes Dropped",
+      "tens":       2,
+      "note_space": true
+    },
+    "id": "tele_dropped_cubes"
+  },
+  {
+    "type":    "Divider",
+    "options": {
+      "label": "Climbing"
+    }
+  },
+  {
+    "type":    "HorizontalOptions",
+    "options": {
+      "label": "Setup Climb At (s)",
+      "options": ["<5", "<10", "<20", "<30", "<40", "<50", "<60", "60+"]
+
+    },
+    "id": "tele_deployed_ramps"
+  },
+  {
+    "type":    "HorizontalOptions",
+    "options": {
+      "label":   "Lifted Self",
+      "options": [
+        "S",
+        "F"
+      ],
+      "offset": -2.04,
+      "prev_line": true
+    },
+    "id": "tele_climbed_self",
+    "default": "NA"
+  },
+  {
+    "type":    "Numbers",
+    "options": {
+      "label": "Partners Lifted",
+      "ones":  2
+    },
+    "id": "tele_partners_lifted"
+  },
+  {
+    "type":    "Numbers",
+    "options": {
+      "label": "Partners Attempted",
+      "ones":  2,
+      "prev_line": true
+    },
+    "id": "tele_partners_attempted"
+  },
+  {
+    "type":    "Boolean",
+    "options": {
+      "label": "Dropped Partner",
+      "prev_line": true
+    },
+    "id": "tele_partner_dropped"
+  },
+  {
+    "type":    "HorizontalOptions",
+    "options": {
+      "label": "Parked on Platform",
+      "options": ["S", "F"]
+    },
+    "id": "tele_parked"
+  },
+  {
+    "type":    "Boolean",
+    "options": {
+      "label": "Lifted By Partner",
+      "prev_line": true
+    },
+    "id": "tele_lifted_by_partner"
+  },
+  {
+    "type":    "Divider",
+    "options": {
+      "label": "Overall Performance"
+    }
+  },
+  {
+    "type":    "Boolean",
+    "options": {
+      "label": "Stopped Moving"
+    },
+    "id": "disabled"
+  },
+  {
+    "type":    "Boolean",
+    "options": {
+      "label":     "Never Moved",
+      "prev_line": true
+    },
+    "id": "no_move"
+  },
+  {
+    "type":    "Boolean",
+    "options": {
+      "label":     "No Show",
+      "prev_line": true
+    },
+    "id": "no_show"
+  },
+  {
+    "type":    "HorizontalOptions",
+    "options": {
+      "label":     "Defense",
+      "options":   [
+        "💩",
+        "👎",
+        "👍",
+        "🔥"
+      ]
+    },
+    "id": "tele_defense",
+    "default": ""
+  },
+  {
+    "type":    "Image",
+    "options": {
+      "label":      "Notes",
+      "width":      5.5,
+      "height":     1.75,
+      "image_path": null
+    },
+    "id": "notes"
+  }
+]
