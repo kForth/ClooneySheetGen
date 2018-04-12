@@ -75,12 +75,12 @@
       "tens":       2,
       "note_space": true
     },
-    "id": "tele_scored_own_switch"
+    "id": "tele_scored_exchange"
   },
   {
     "type":    "Numbers",
     "options": {
-      "label":      "Scored Own Switch",
+      "label":      "Scored Home Switch",
       "tens":       2,
       "note_space": true
     },
@@ -89,7 +89,7 @@
   {
     "type":    "Numbers",
     "options": {
-      "label":      "Scored Opp Switch",
+      "label":      "Scored Away Switch",
       "tens":       2,
       "note_space": true
     },
@@ -135,7 +135,7 @@
       "options": ["<5", "<10", "<20", "<30", "<40", "<50", "<60", "60+"]
 
     },
-    "id": "tele_deployed_ramps"
+    "id": "tele_setup_climb_time"
   },
   {
     "type":    "HorizontalOptions",
